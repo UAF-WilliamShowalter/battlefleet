@@ -1,9 +1,9 @@
 //
 //  main.cpp
 //  BattleFleet
-//
-//  Created by William Showalter on 15/03/02.
-//  Copyright (c) 2015 UAF CS372. All rights reserved.
+//  UAF CS372
+//  Spring 2015, Project 1
+//  William Showalter & Jacob McKenna
 //
 
 #include <iostream>

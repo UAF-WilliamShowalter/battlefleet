@@ -8,10 +8,20 @@
 
 /* Begin PBXBuildFile section */
 		3DF936EE1AA5249400059486 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3DF936ED1AA5249400059486 /* main.cpp */; };
+		3DF937051AA52C7900059486 /* test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3DF937041AA52C7900059486 /* test.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		3DF936E81AA5249400059486 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+		3DF936F91AA52A5F00059486 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = /usr/share/man/man1/;
@@ -25,10 +35,20 @@
 /* Begin PBXFileReference section */
 		3DF936EA1AA5249400059486 /* BattleFleet */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = BattleFleet; sourceTree = BUILT_PRODUCTS_DIR; };
 		3DF936ED1AA5249400059486 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		3DF936FB1AA52A5F00059486 /* BattleFleet Test */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "BattleFleet Test"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3DF937031AA52B0C00059486 /* catch.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = catch.hpp; sourceTree = "<group>"; };
+		3DF937041AA52C7900059486 /* test.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = test.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		3DF936E71AA5249400059486 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3DF936F81AA52A5F00059486 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -42,6 +62,7 @@
 			isa = PBXGroup;
 			children = (
 				3DF936EC1AA5249400059486 /* BattleFleet */,
+				3DF936FC1AA52A5F00059486 /* BattleFleet Test */,
 				3DF936EB1AA5249400059486 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -50,6 +71,7 @@
 			isa = PBXGroup;
 			children = (
 				3DF936EA1AA5249400059486 /* BattleFleet */,
+				3DF936FB1AA52A5F00059486 /* BattleFleet Test */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -60,6 +82,15 @@
 				3DF936ED1AA5249400059486 /* main.cpp */,
 			);
 			path = BattleFleet;
+			sourceTree = "<group>";
+		};
+		3DF936FC1AA52A5F00059486 /* BattleFleet Test */ = {
+			isa = PBXGroup;
+			children = (
+				3DF937041AA52C7900059486 /* test.cpp */,
+				3DF937031AA52B0C00059486 /* catch.hpp */,
+			);
+			path = "BattleFleet Test";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -82,6 +113,23 @@
 			productReference = 3DF936EA1AA5249400059486 /* BattleFleet */;
 			productType = "com.apple.product-type.tool";
 		};
+		3DF936FA1AA52A5F00059486 /* BattleFleet Test */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3DF936FF1AA52A5F00059486 /* Build configuration list for PBXNativeTarget "BattleFleet Test" */;
+			buildPhases = (
+				3DF936F71AA52A5F00059486 /* Sources */,
+				3DF936F81AA52A5F00059486 /* Frameworks */,
+				3DF936F91AA52A5F00059486 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "BattleFleet Test";
+			productName = "BattleFleet Test";
+			productReference = 3DF936FB1AA52A5F00059486 /* BattleFleet Test */;
+			productType = "com.apple.product-type.tool";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -92,6 +140,9 @@
 				ORGANIZATIONNAME = "UAF CS372";
 				TargetAttributes = {
 					3DF936E91AA5249400059486 = {
+						CreatedOnToolsVersion = 6.1.1;
+					};
+					3DF936FA1AA52A5F00059486 = {
 						CreatedOnToolsVersion = 6.1.1;
 					};
 				};
@@ -109,6 +160,7 @@
 			projectRoot = "";
 			targets = (
 				3DF936E91AA5249400059486 /* BattleFleet */,
+				3DF936FA1AA52A5F00059486 /* BattleFleet Test */,
 			);
 		};
 /* End PBXProject section */
@@ -119,6 +171,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				3DF936EE1AA5249400059486 /* main.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3DF936F71AA52A5F00059486 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3DF937051AA52C7900059486 /* test.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -213,6 +273,24 @@
 			};
 			name = Release;
 		};
+		3DF937001AA52A5F00059486 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		3DF937011AA52A5F00059486 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -230,6 +308,14 @@
 			buildConfigurations = (
 				3DF936F21AA5249400059486 /* Debug */,
 				3DF936F31AA5249400059486 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		3DF936FF1AA52A5F00059486 /* Build configuration list for PBXNativeTarget "BattleFleet Test" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3DF937001AA52A5F00059486 /* Debug */,
+				3DF937011AA52A5F00059486 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 		};
