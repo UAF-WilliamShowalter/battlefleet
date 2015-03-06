@@ -14,11 +14,17 @@
 
 class BFShip {
 public:
-	void placeShip(unsigned int x, unsigned int y);
+	
+	BFShip(unsigned int x, unsigned int y, unsigned int length);
 	std::pair<unsigned int,unsigned int> getPosition();
+	unsigned int getLength();
+    
 private:
+    
 	unsigned int _xCoordinate;
 	unsigned int _yCoordinate;
+	unsigned int _length;
+	
 };
 
 #endif /* defined(__BattleFleet__BFShip__) */

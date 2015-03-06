@@ -8,10 +8,21 @@
 
 #include "BFShip.h"
 
-void BFShip::placeShip(unsigned int x, unsigned int y){
+BFShip::BFShip(unsigned int x, unsigned int y, unsigned int length){
+    
 	_xCoordinate = x;
 	_yCoordinate = y;
+    _length = length;
+
 }
 std::pair<unsigned int, unsigned int> BFShip::getPosition(){
-	return std::pair<unsigned int, unsigned int>(_xCoordinate,_yCoordinate);
+
+    return std::pair<unsigned int, unsigned int>(_xCoordinate,_yCoordinate);
+    
+}
+
+unsigned int BFShip::getLength(){
+    
+    return _length;
+    
 }

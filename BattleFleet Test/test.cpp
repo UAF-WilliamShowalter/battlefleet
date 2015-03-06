@@ -16,19 +16,21 @@
 TEST_CASE("Tests BattleFleet Game Components","BattleFleet")
 {
 	SECTION("Ship Placement test"){
-		BFShip testShip;
+        BFShip testShip1(0,0,3);
 		std::pair<unsigned int, unsigned int> position;
 
-		// X,Y
-		testShip.placeShip(0,0);
-		testShip.getPosition();
+		testShip1.getPosition();
 		position.first=0;
 		position.second=0;
 
-		REQUIRE(testShip.getPosition() == position);
+		REQUIRE(testShip1.getPosition() == position);
+        REQUIRE(testShip1.getLength() == 3);
+        
 
-		testShip.placeShip(3,4);
+        testShip1 = BFShip(3,4,4);
 		position = std::pair<unsigned int, unsigned int>(3,4);
-		REQUIRE(testShip.getPosition() == position);
+		REQUIRE(testShip1.getPosition() == position);
+        REQUIRE(testShip1.getLength() == 4);
+        
 	}
 }
