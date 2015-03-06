@@ -29,5 +29,16 @@ TEST_CASE("Tests BattleFleet Game Components","BattleFleet")
         REQUIRE(testShip.getLength() == 4);
         REQUIRE(testShip.getDirection() == East);
         
+        testShip = BFShip(10,10,5,2);
+        position = std::pair<unsigned int, unsigned int>(10,10);
+        REQUIRE(testShip.getPosition() == position);
+        REQUIRE(testShip.getLength() == 5);
+        REQUIRE(testShip.getDirection() == South);
+        
+        testShip = BFShip(9,1,2,3);
+        position = std::pair<unsigned int, unsigned int>(9,1);
+        REQUIRE(testShip.getPosition() == position);
+        REQUIRE(testShip.getLength() == 2);
+        REQUIRE(testShip.getDirection() == West);
 	}
 }
