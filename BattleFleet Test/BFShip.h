@@ -12,18 +12,22 @@
 #include <stdio.h>
 #include <utility>
 
+enum Direction {North, East, South, West};
+
 class BFShip {
 public:
 	
-	BFShip(unsigned int x, unsigned int y, unsigned int length);
+	BFShip(unsigned int x, unsigned int y, unsigned int length, unsigned int Direction);
 	std::pair<unsigned int,unsigned int> getPosition();
 	unsigned int getLength();
+	unsigned int getDirection();
     
 private:
     
 	unsigned int _xCoordinate;
 	unsigned int _yCoordinate;
 	unsigned int _length;
+	unsigned int _direction;
 	
 };
 
