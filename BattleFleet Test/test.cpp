@@ -11,13 +11,24 @@
 
 #include <iostream>
 #include <utility>
+#include "BFShip.h"
 
 TEST_CASE("Tests BattleFleet Game Components","BattleFleet")
 {
 	SECTION("Ship Placement test"){
 		BFShip testShip;
+		std::pair<unsigned int, unsigned int> position;
+
 		// X,Y
-		testShip.placeOnBoard(0,0);
-		REQUIRE(testShip.getPosition() == std_pair<int,int>(0,0));
-	}
+		testShip.placeShip(0,0);
+		testShip.getPosition();
+		position.first=0;
+		position.second=0;
+
+		REQUIRE(testShip.getPosition() == position);
+
+		testShip.placeShip(3,4);
+		position = std::pair<unsigned int, unsigned int>(3,4);
+		REQUIRE(testShip.getPosition() == position);
+	}
 }

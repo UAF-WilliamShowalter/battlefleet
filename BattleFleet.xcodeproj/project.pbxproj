@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3DB7A99E1AA92CAE006925A6 /* BFShip.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3DB7A99C1AA92CAE006925A6 /* BFShip.cpp */; };
+		3DB7A99F1AA92CAE006925A6 /* BFShip.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3DB7A99C1AA92CAE006925A6 /* BFShip.cpp */; };
 		3DF936EE1AA5249400059486 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3DF936ED1AA5249400059486 /* main.cpp */; };
 		3DF937051AA52C7900059486 /* test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3DF937041AA52C7900059486 /* test.cpp */; };
 /* End PBXBuildFile section */
@@ -33,6 +35,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		3DB7A99C1AA92CAE006925A6 /* BFShip.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BFShip.cpp; sourceTree = "<group>"; };
+		3DB7A99D1AA92CAE006925A6 /* BFShip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFShip.h; sourceTree = "<group>"; };
 		3DF936EA1AA5249400059486 /* BattleFleet */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = BattleFleet; sourceTree = BUILT_PRODUCTS_DIR; };
 		3DF936ED1AA5249400059486 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		3DF936FB1AA52A5F00059486 /* BattleFleet Test */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "BattleFleet Test"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -89,6 +93,8 @@
 			children = (
 				3DF937041AA52C7900059486 /* test.cpp */,
 				3DF937031AA52B0C00059486 /* catch.hpp */,
+				3DB7A99C1AA92CAE006925A6 /* BFShip.cpp */,
+				3DB7A99D1AA92CAE006925A6 /* BFShip.h */,
 			);
 			path = "BattleFleet Test";
 			sourceTree = "<group>";
@@ -171,6 +177,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3DF936EE1AA5249400059486 /* main.cpp in Sources */,
+				3DB7A99E1AA92CAE006925A6 /* BFShip.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -179,6 +186,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3DF937051AA52C7900059486 /* test.cpp in Sources */,
+				3DB7A99F1AA92CAE006925A6 /* BFShip.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -310,6 +318,7 @@
 				3DF936F31AA5249400059486 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		3DF936FF1AA52A5F00059486 /* Build configuration list for PBXNativeTarget "BattleFleet Test" */ = {
 			isa = XCConfigurationList;
@@ -318,6 +327,7 @@
 				3DF937011AA52A5F00059486 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
