@@ -10,10 +10,14 @@
 #include "catch.hpp"
 
 #include <iostream>
+#include <utility>
 
-TEST_CASE("Scores BattleFleet Game Components","BattleFleet")
+TEST_CASE("Tests BattleFleet Game Components","BattleFleet")
 {
-	SECTION("Trivial test"){
-		REQUIRE(1 == 1);
-	}
+	SECTION("Ship Placement test"){
+		BFShip testShip;
+		// X,Y
+		testShip.placeOnBoard(0,0);
+		REQUIRE(testShip.getPosition() == std_pair<int,int>(0,0));
+	}
 }
