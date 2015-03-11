@@ -44,7 +44,13 @@ TEST_CASE("Tests BattleFleet Game Components","BattleFleet")
 
 	SECTION("Board Multiple Ship Placement test"){
 		BFBoard testBoard;
+		vector<BFShip> testShips;
 		REQUIRE(testBoard.placeShip(0,0,3,NORTH));
+		testShips.push_back(BFShip(0,0,3,NORTH));
+		REQUIRE(testBoard.getShips() == testShips);
 		REQUIRE(testBoard.placeShip(1,0,3,NORTH));
+		testShips.push_back(BFShip(1,0,3,NORTH));=
+		REQUIRE(testBoard.getShips() == testShips);
+
 	}
 }
