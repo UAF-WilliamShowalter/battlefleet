@@ -15,7 +15,7 @@
 
 TEST_CASE("Tests BattleFleet Game Components","BattleFleet")
 {
-	SECTION("Ship Placement test"){
+	SECTION("Individual Ship Placement test"){
         BFShip testShip(0,0,3,0);
 		std::pair<unsigned int, unsigned int> position(0,0);
 		REQUIRE(testShip.getPosition() == position);
@@ -39,5 +39,9 @@ TEST_CASE("Tests BattleFleet Game Components","BattleFleet")
         REQUIRE(testShip.getPosition() == position);
         REQUIRE(testShip.getLength() == 2);
         REQUIRE(testShip.getDirection() == West);
+	}
+
+	SECTION("Board Multiple Ship Placement test"){
+		REQUIRE(testBoard.placeShip(0,0,3,0));
 	}
 }
