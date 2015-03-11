@@ -12,7 +12,7 @@
 #include <stdio.h>
 #include <utility>
 
-enum Direction {North, East, South, West};
+enum Direction { North, East, South, West };
 
 class BFShip {
 public:
