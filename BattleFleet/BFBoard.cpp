@@ -11,3 +11,7 @@
 bool BFBoard::placeShip(unsigned int x, unsigned int y, unsigned int length, unsigned int Direction){
 	return true;
 }
+
+const vector<BFShip> & BFBoard::getShips() const{
+	return _board;
+}

@@ -20,7 +20,7 @@ const int BF_BOARD_SIZE = 10;
 class BFBoard {
 public:
 	bool placeShip(unsigned int x, unsigned int y, unsigned int length, unsigned int Direction);
-
+	const vector<BFShip> & getShips() const;
 private:
 	vector<BFShip> _board;
 };

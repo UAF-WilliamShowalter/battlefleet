@@ -18,9 +18,11 @@ class BFShip {
 public:
 	
 	BFShip(unsigned int x, unsigned int y, unsigned int length, unsigned int Direction);
-	std::pair<unsigned int,unsigned int> getPosition();
-	unsigned int getLength();
-	unsigned int getDirection();
+	const std::pair<unsigned int,unsigned int> getPosition() const;
+	const unsigned int getLength() const;
+	const unsigned int getDirection() const;
+	
+	bool operator == (const BFShip & rhs) const;
     
 private:
     

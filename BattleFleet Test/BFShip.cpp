@@ -17,20 +17,26 @@ BFShip::BFShip(unsigned int x, unsigned int y, unsigned int length, unsigned int
 
 }
 
-std::pair<unsigned int, unsigned int> BFShip::getPosition(){
+const std::pair<unsigned int, unsigned int> BFShip::getPosition() const{
 
     return std::pair<unsigned int, unsigned int>(_xCoordinate, _yCoordinate);
     
 }
 
-unsigned int BFShip::getLength(){
+const unsigned int BFShip::getLength() const{
     
     return _length;
     
 }
 
-unsigned int BFShip::getDirection(){
+const unsigned int BFShip::getDirection() const{
     
     return _direction;
     
+}
+
+bool BFShip::operator == (const BFShip & rhs) const{
+	return (this->getPosition() == rhs.getPosition()) &&
+		(this->_length == rhs.getLength()) &&
+		(this->_direction == rhs.getDirection());
 }
