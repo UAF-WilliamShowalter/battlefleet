@@ -10,6 +10,18 @@
 
 bool BFBoard::placeShip(unsigned int x, unsigned int y, unsigned int length, unsigned int direction){
     
+    if ((x < 0) || (x > 9)) {
+        
+        return false;
+        
+    }
+    
+    if ((y < 0) || (y > 9)) {
+        
+        return false;
+        
+    }
+    
 	_board.push_back(BFShip(x,y,length,direction));
 	return true;
 
