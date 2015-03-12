@@ -28,15 +28,18 @@ struct pair_hash {
 	}
 };
 
+typedef unordered_set<pair<unsigned int, unsigned int>, pair_hash> coordinateSet;
+
+
 class BFBoard {
 public:
     
 	bool placeShip(unsigned int x, unsigned int y, unsigned int length, unsigned int Direction);
-	const unordered_set<pair<unsigned int,unsigned int>, pair_hash > getOccupiedSpaces () const;
+	bool checkCollision (const BFShip & newShip) const;
 	const vector<BFShip> & getShips() const;
 
 private:
-
+	unordered_set<boardCoordinate,pair_hash> getSpaces(const BFShip & ship) const;
     vector<BFShip> _board;
 
 };

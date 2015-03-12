@@ -64,7 +64,22 @@ TEST_CASE("Tests BattleFleet Game Components","BattleFleet")
         REQUIRE(!testBoard.placeShip(1,4,3,WEST));
         REQUIRE(!testBoard.placeShip(7,7,5,EAST));
         REQUIRE(!testBoard.placeShip(1,9,2,NORTH));
-        
+
+		// ALREADY OCCUPIED SPACES
+		REQUIRE(!testBoard.placeShip(0,0,3,NORTH));
+		REQUIRE(testBoard.getShips() == testShips);
+		REQUIRE(!testBoard.placeShip(1,0,3,NORTH));
+		REQUIRE(testBoard.getShips() == testShips);
+		REQUIRE(!testBoard.placeShip(0,1,3,NORTH));
+		REQUIRE(testBoard.getShips() == testShips);
+
+		// CROSSED SHIP PLACEMENT - FIRST SUCCEEDS, SECOND FAILS
+		REQUIRE(testBoard.placeShip(7,8,3,EAST));
+		testShips.push_back(BFShip(7,8,3,EAST));
+		REQUIRE(testBoard.getShips() == testShips);
+		REQUIRE(!testBoard.placeShip(8,7,3,NORTH));
+		REQUIRE(testBoard.getShips() == testShips);
+
 	}
 }
 
