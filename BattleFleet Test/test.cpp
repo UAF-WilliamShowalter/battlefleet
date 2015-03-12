@@ -53,5 +53,11 @@ TEST_CASE("Tests BattleFleet Game Components","BattleFleet")
 		testShips.push_back(BFShip(1,0,3,NORTH));
 		REQUIRE(testBoard.getShips() == testShips);
 
+        // Bad Placement tests...
+        REQUIRE(testBoard.placeShip(-1,0,3,NORTH));
+        REQUIRE(testBoard.placeShip(11, 11, 5, SOUTH));
 	}
 }
+
+
+

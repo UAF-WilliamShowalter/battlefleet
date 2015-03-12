@@ -9,8 +9,10 @@
 #include "BFBoard.h"
 
 bool BFBoard::placeShip(unsigned int x, unsigned int y, unsigned int length, unsigned int direction){
+    
 	_board.push_back(BFShip(x,y,length,direction));
 	return true;
+
 }
 
 const vector<BFShip> & BFBoard::getShips() const{
