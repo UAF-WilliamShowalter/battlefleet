@@ -32,7 +32,6 @@ const unsigned int BFShip::getLength() const{
 const unsigned int BFShip::getDirection() const{
     
     return _direction;
-    
 }
 
 bool BFShip::operator == (const BFShip & rhs) const{
