@@ -57,6 +57,8 @@ bool BFBoard::placeShip(unsigned int x, unsigned int y, unsigned int length, uns
             
         }
     }
+
+	this->getOccupiedSpaces();
     
 	_board.push_back(BFShip(x,y,length,direction));
 	return true;
@@ -65,4 +67,29 @@ bool BFBoard::placeShip(unsigned int x, unsigned int y, unsigned int length, uns
 
 const vector<BFShip> & BFBoard::getShips() const{
 	return _board;
+}
+
+const unordered_set<pair<unsigned int,unsigned int>, pair_hash> BFBoard::getOccupiedSpaces () const{
+	unordered_set<pair<unsigned int, unsigned int>, pair_hash> spaces;
+
+	for (auto ship : _board){
+		boardCoordinate currentPosition = ship.getPosition();
+		int xModifier = 0, yModifier = 0;
+
+		if (ship.getDirection() == NORTH)
+			yModifier = 1;
+		if (ship.getDirection() == SOUTH)
+			yModifier = -1;
+		if (ship.getDirection() == EAST)
+			xModifier = 1;
+		if (ship.getDirection() == WEST)
+			xModifier = -1;
+
+		for (auto coordNum = 0; coordNum < ship.getLength();
+			 currentPosition.first += xModifier, currentPosition.second += yModifier, coordNum++){
+			spaces.insert(currentPosition);
+		}
+	}
+
+	return spaces;
 }

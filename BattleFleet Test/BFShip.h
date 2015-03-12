@@ -13,6 +13,7 @@
 #include <utility>
 
 enum Direction { NORTH, EAST, SOUTH, WEST };
+typedef std::pair<unsigned int,unsigned int> boardCoordinate;
 
 class BFShip {
 public:
