@@ -9,8 +9,8 @@
 /* Begin PBXBuildFile section */
 		3D0C03AA1AB0ED2900E11260 /* BFBoard.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D0C03A81AB0ED2900E11260 /* BFBoard.cpp */; };
 		3D0C03AB1AB0ED2900E11260 /* BFBoard.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D0C03A81AB0ED2900E11260 /* BFBoard.cpp */; };
-		3DB7A99E1AA92CAE006925A6 /* BFShip.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3DB7A99C1AA92CAE006925A6 /* BFShip.cpp */; };
-		3DB7A99F1AA92CAE006925A6 /* BFShip.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3DB7A99C1AA92CAE006925A6 /* BFShip.cpp */; };
+		3DC0BB301AB25A7A00E0A7AC /* BFShip.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3DC0BB2E1AB25A7A00E0A7AC /* BFShip.cpp */; };
+		3DC0BB311AB25A7A00E0A7AC /* BFShip.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3DC0BB2E1AB25A7A00E0A7AC /* BFShip.cpp */; };
 		3DF936EE1AA5249400059486 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3DF936ED1AA5249400059486 /* main.cpp */; };
 		3DF937051AA52C7900059486 /* test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3DF937041AA52C7900059486 /* test.cpp */; };
 /* End PBXBuildFile section */
@@ -40,8 +40,8 @@
 		3D0C03A81AB0ED2900E11260 /* BFBoard.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BFBoard.cpp; sourceTree = "<group>"; };
 		3D0C03A91AB0ED2900E11260 /* BFBoard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFBoard.h; sourceTree = "<group>"; };
 		3D875CB31AAA6B2300E3628F /* Project Diary - Will.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "Project Diary - Will.txt"; sourceTree = "<group>"; };
-		3DB7A99C1AA92CAE006925A6 /* BFShip.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = BFShip.cpp; path = "BattleFleet Test/BFShip.cpp"; sourceTree = SOURCE_ROOT; };
-		3DB7A99D1AA92CAE006925A6 /* BFShip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BFShip.h; path = "BattleFleet Test/BFShip.h"; sourceTree = SOURCE_ROOT; usesTabs = 1; };
+		3DC0BB2E1AB25A7A00E0A7AC /* BFShip.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BFShip.cpp; sourceTree = "<group>"; };
+		3DC0BB2F1AB25A7A00E0A7AC /* BFShip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFShip.h; sourceTree = "<group>"; };
 		3DF936EA1AA5249400059486 /* BattleFleet */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = BattleFleet; sourceTree = BUILT_PRODUCTS_DIR; };
 		3DF936ED1AA5249400059486 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		3DF936FB1AA52A5F00059486 /* BattleFleet Test */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "BattleFleet Test"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -89,8 +89,8 @@
 		3DF936EC1AA5249400059486 /* BattleFleet */ = {
 			isa = PBXGroup;
 			children = (
-				3DB7A99C1AA92CAE006925A6 /* BFShip.cpp */,
-				3DB7A99D1AA92CAE006925A6 /* BFShip.h */,
+				3DC0BB2E1AB25A7A00E0A7AC /* BFShip.cpp */,
+				3DC0BB2F1AB25A7A00E0A7AC /* BFShip.h */,
 				3DF936ED1AA5249400059486 /* main.cpp */,
 				3D0C03A81AB0ED2900E11260 /* BFBoard.cpp */,
 				3D0C03A91AB0ED2900E11260 /* BFBoard.h */,
@@ -185,8 +185,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				3DF936EE1AA5249400059486 /* main.cpp in Sources */,
-				3DB7A99E1AA92CAE006925A6 /* BFShip.cpp in Sources */,
 				3D0C03AA1AB0ED2900E11260 /* BFBoard.cpp in Sources */,
+				3DC0BB301AB25A7A00E0A7AC /* BFShip.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -195,8 +195,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				3DF937051AA52C7900059486 /* test.cpp in Sources */,
-				3DB7A99F1AA92CAE006925A6 /* BFShip.cpp in Sources */,
 				3D0C03AB1AB0ED2900E11260 /* BFBoard.cpp in Sources */,
+				3DC0BB311AB25A7A00E0A7AC /* BFShip.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
