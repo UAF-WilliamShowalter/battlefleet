@@ -1,14 +1,16 @@
 GITHUB URL: https://github.com/williamshowalter/battlefleet
 
 -------------
-
+-------------
 Monday 3/2
 We went through our user stories and assigned story points for how difficult we assumed tasks to be. We also broke the user stories into a first batch of 11 necessary features and a second grouping of features to be looked at when we have most of those done. This first group acts kind of like our first “scrum” set. We did not set a prioritization within that batch of tasks yet.
 
 Before leaving I made a repo on github and added Jacob as a contributor, then pushed a mostly-empty Xcode project with a testing target that had the catch header file in it.
+
 Total time: 1hr
 -------------
 
+-------------
 Thursday 3/5
 We met for a few hours in the CS lab, from about 1:45PM until about 4:30PM or so. We only addressed one story, “I want to place a ship.” We managed to work through placing a ship, and having a ship have an associated length. We practiced paired programming, and had to setup Jacob’s laptop to be able to push to github from Xcode (previously he only had used the github GUI application). We installed SSH keys, and I went through reviewing with Jacob how git repos, commits, pushing/pulling, and what not worked. A good amount of time was spent on this.
 
@@ -16,3 +18,37 @@ We still need to implement placing multiple ships on the same board, which will 
 
 Total time: 3hr
 -------------
+
+-------------
+Wednesday 3/11
+We met for 1.5 hours in my office. Resetup ssh keys on Jacob's laptop for github. We decided that user stories will be built in branches and then merged back to main when completed, hopefully after partner review if possible. 
+
+We added tests for placing multiple ships on the same board, which then required adding a board class in addition to our ship class. We chose to make our "_board" variable a vector of ships, which seemed appropriate when the only thing that we are putting on the board so far is ships.
+
+Test coverage for placing ships on the board was: Ships added must be the same ships returned by the funciton getShips.
+
+Total time: 1.5hr
+-------------
+
+-------------
+Thursday 3/12
+2 hour meeting in my office. Added tests for off-board placement, both starting off the board and ending off the board. Also created tests for bad ship placement where the ships would overlap.
+
+Handled off-board placement with basic boundary checking. Handled ship collision by building unordered sets of occupied spaces vs proposed spaces, and comparing them for shared entries.
+
+Total time: 2hr
+-------------
+
+-------------
+Wednesday 3/18
+Worked independently remotely. Split user stories up with Jacob. Not yet able to make a google hangout work - hopefully tomorrow although schedules could possibly be conflicting.
+
+Finished userstories:
+"I want to place a pin"
+"I want to know if a pin is a hit or a miss"
+"Check if a ship has been sunk"
+"I want to see stats on hits and misses"
+
+Implementaiton of the statistics one only returns total number of hits vs misses. It would be trivial to implement a getter function to return the number of placed pins, which can then be used to complete the statistics.
+
+These all form the basic set of programming logic that goes into the game. The GUI is being worked on by Jake, who should hopefully be pushing changes soon. Menu and game classes need to be created to drive playing, and they'll tie heavily into the GUI. 
