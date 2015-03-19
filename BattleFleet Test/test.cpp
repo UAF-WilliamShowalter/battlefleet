@@ -163,6 +163,42 @@ TEST_CASE("Tests BattleFleet Game Components","BattleFleet")
 		// should finally sink
 		REQUIRE(testBoard.placePin(7,4));
 		REQUIRE(!testBoard.checkAfloat(testBoard.getShips().back()));
+	}
 
+	SECTION("Check count of hits"){
+		BFBoard testBoard;
+
+		REQUIRE(testBoard.placeShip(0,0,3,NORTH));
+		REQUIRE(testBoard.placeShip(3,4,5,EAST));
+
+		REQUIRE(testBoard.countHits() == 0);
+		REQUIRE(testBoard.placePin(0,0));
+		REQUIRE(testBoard.countHits() == 1);
+		REQUIRE(testBoard.placePin(0,1));
+		REQUIRE(testBoard.countHits() == 2);
+		REQUIRE(testBoard.placePin(0,2));
+		REQUIRE(testBoard.countHits() == 3);
+
+
+		REQUIRE(testBoard.placePin(5,0));
+		REQUIRE(testBoard.countHits() == 3);
+		REQUIRE(testBoard.placePin(5,1));
+		REQUIRE(testBoard.countHits() == 3);
+		REQUIRE(testBoard.placePin(5,2));
+		REQUIRE(testBoard.countHits() == 3);
+		REQUIRE(testBoard.placePin(5,3));
+		REQUIRE(testBoard.countHits() == 3);
+
+
+		REQUIRE(testBoard.placePin(3,4));
+		REQUIRE(testBoard.countHits() == 4);
+		REQUIRE(testBoard.placePin(4,4));
+		REQUIRE(testBoard.countHits() == 5);
+		REQUIRE(testBoard.placePin(5,4));
+		REQUIRE(testBoard.countHits() == 6);
+		REQUIRE(testBoard.placePin(6,4));
+		REQUIRE(testBoard.countHits() == 7);
+		REQUIRE(testBoard.placePin(7,4));
+		REQUIRE(testBoard.countHits() == 8);
 	}
 }

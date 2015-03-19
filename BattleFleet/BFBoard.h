@@ -40,6 +40,7 @@ public:
 	bool checkCollision (const BFShip & newShip) const;
 	bool checkAfloat (const BFShip & shipToCheck) const;
 	const vector<BFShip> & getShips() const;
+	unsigned int countHits() const;
 
 private:
 	unordered_set<boardCoordinate,pair_hash> getSpaces(const BFShip & ship) const;

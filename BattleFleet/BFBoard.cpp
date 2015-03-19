@@ -160,3 +160,13 @@ bool BFBoard::checkAfloat (const BFShip & shipToCheck) const{
 	else
 		return false;
 }
+
+unsigned int BFBoard::countHits() const{
+	unsigned int count = 0;
+	for (auto pin : _pins)
+	{
+		if (coordHasHit(pin.first,pin.second))
+			count++;
+	}
+	return count;
+}
