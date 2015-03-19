@@ -125,5 +125,8 @@ TEST_CASE("Tests BattleFleet Game Components","BattleFleet")
 		REQUIRE(!testBoard.coordHasHit(1,1));
 		REQUIRE(!testBoard.coordHasHit(9,9));
 		REQUIRE(!testBoard.coordHasHit(99,99));
+
+		//Test a would-be success when the pin hasn't been placed yet - returns false
+		REQUIRE(!testBoard.coordHasHit(0,2));
 	}
 }
