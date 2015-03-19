@@ -115,8 +115,9 @@ bool BFBoard::placePin(unsigned int x, unsigned int y){
 	{
 		if (pin.first == x && pin.second == y)
 			return false;
+		if ((BF_BOARD_SIZE <= x) || (BF_BOARD_SIZE <= y))
+			return false;
 	}
-
 	_pins.push_back(pin(x,y));
 	return true;
 }
