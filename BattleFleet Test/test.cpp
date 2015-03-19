@@ -141,11 +141,28 @@ TEST_CASE("Tests BattleFleet Game Components","BattleFleet")
 		REQUIRE(testBoard.placePin(0,0));
 		REQUIRE(testBoard.placePin(0,1));
 
-		// Check and see if first ship (0,0,3,NORTH) is still afloat - should be floating.
-		REQUIRE(testBoard.checkAfloat(testBoard.getShips().front()));
+		// Check and see if last ship (0,0,3,NORTH) is still afloat - should be floating.
+		REQUIRE(testBoard.checkAfloat(testBoard.getShips().back()));
 
 		REQUIRE(testBoard.placePin(0,2));
 		REQUIRE(testBoard.coordHasHit(0,2));
-		REQUIRE(!testBoard.checkAfloat(testBoard.getShips().front()));
+		REQUIRE(!testBoard.checkAfloat(testBoard.getShips().back()));
+
+
+		// Checks for another ship.
+		REQUIRE(testBoard.placeShip(3,4,5,EAST));
+		REQUIRE(testBoard.checkAfloat(testBoard.getShips().back()));
+		REQUIRE(testBoard.placePin(3,4));
+		REQUIRE(testBoard.checkAfloat(testBoard.getShips().back()));
+		REQUIRE(testBoard.placePin(4,4));
+		REQUIRE(testBoard.checkAfloat(testBoard.getShips().back()));
+		REQUIRE(testBoard.placePin(5,4));
+		REQUIRE(testBoard.checkAfloat(testBoard.getShips().back()));
+		REQUIRE(testBoard.placePin(6,4));
+		REQUIRE(testBoard.checkAfloat(testBoard.getShips().back()));
+		// should finally sink
+		REQUIRE(testBoard.placePin(7,4));
+		REQUIRE(!testBoard.checkAfloat(testBoard.getShips().back()));
+
 	}
 }

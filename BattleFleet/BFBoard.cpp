@@ -122,7 +122,7 @@ bool BFBoard::placePin(unsigned int x, unsigned int y){
 	return true;
 }
 
-bool BFBoard::coordHasHit(unsigned int x, unsigned int y){
+bool BFBoard::coordHasHit(unsigned int x, unsigned int y) const{
 	pin pinToCheck = pin(x,y);
 	bool doesNotExist = true;
 	
@@ -148,5 +148,15 @@ bool BFBoard::coordHasHit(unsigned int x, unsigned int y){
 }
 
 bool BFBoard::checkAfloat (const BFShip & shipToCheck) const{
-	return true;
+	coordinateSet shipCoordinates = getSpaces(shipToCheck);
+	unsigned int hits = 0;
+	for (auto coord = shipCoordinates.begin(); coord != shipCoordinates.end(); coord++){
+		if (this->coordHasHit(coord->first,coord->second))
+			hits++;
+	}
+
+	if (hits < shipToCheck.getLength())
+		return true;
+	else
+		return false;
 }
