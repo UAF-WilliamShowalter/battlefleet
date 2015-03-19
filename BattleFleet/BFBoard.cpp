@@ -124,6 +124,17 @@ bool BFBoard::placePin(unsigned int x, unsigned int y){
 
 bool BFBoard::coordHasHit(unsigned int x, unsigned int y){
 	pin pinToCheck = pin(x,y);
+	bool doesNotExist = true;
+	
+	for (auto pin : _pins)
+	{
+		if (pin == pinToCheck)
+			doesNotExist = false;
+	}
+
+	if (doesNotExist)
+		return false;
+
 	for (auto ship : _board)
 	{
 		coordinateSet shipCoordinates = getSpaces(ship);
