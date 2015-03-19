@@ -109,3 +109,7 @@ coordinateSet BFBoard::getSpaces(const BFShip & ship) const{
 
 	return spaces;
 }
+
+bool BFBoard::placePin(unsigned int x, unsigned int y){
+	return true;
+}
