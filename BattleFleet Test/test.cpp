@@ -14,7 +14,7 @@
 #include "BFBoard.h"
 #include "catch.hpp"
 
-// Simple commit 
+// Simple commit
 
 TEST_CASE("Tests BattleFleet Game Components","BattleFleet")
 {
