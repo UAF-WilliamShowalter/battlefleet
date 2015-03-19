@@ -24,7 +24,7 @@ bool BFBoard::placeShip(unsigned int x, unsigned int y, unsigned int length, uns
     
     if (direction == NORTH) {
 
-        if ((y + length - 1) > 9) {
+        if ((y + length) > BF_BOARD_SIZE) {
             
             return false;
             
@@ -42,7 +42,7 @@ bool BFBoard::placeShip(unsigned int x, unsigned int y, unsigned int length, uns
     
     if (direction == EAST) {
         
-        if ((x + length - 1) > 9) {
+        if ((x + length) > BF_BOARD_SIZE) {
             
             return false;
             
@@ -73,7 +73,7 @@ const vector<BFShip> & BFBoard::getShips() const{
 }
 
 bool BFBoard::checkCollision (const BFShip & newShip) const{
-	unordered_set<pair<unsigned int, unsigned int>, pair_hash> spaces;
+	coordinateSet spaces;
 
 	coordinateSet newShipCoordinates = getSpaces(newShip);
 
@@ -111,5 +111,12 @@ coordinateSet BFBoard::getSpaces(const BFShip & ship) const{
 }
 
 bool BFBoard::placePin(unsigned int x, unsigned int y){
+	for (auto pin : _pins)
+	{
+		if (pin.first == x && pin.second == y)
+			return false;
+	}
+
+	_pins.push_back(pin(x,y));
 	return true;
 }

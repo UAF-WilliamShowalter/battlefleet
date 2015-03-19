@@ -29,7 +29,7 @@ struct pair_hash {
 };
 
 typedef unordered_set<pair<unsigned int, unsigned int>, pair_hash> coordinateSet;
-
+typedef pair<unsigned int, unsigned int> pin;
 
 class BFBoard {
 public:
@@ -42,7 +42,7 @@ public:
 private:
 	unordered_set<boardCoordinate,pair_hash> getSpaces(const BFShip & ship) const;
     vector<BFShip> _board;
-
+	vector<pin> _pins;
 };
 
 #endif /* defined(__BattleFleet__BFBoard__) */

@@ -85,13 +85,24 @@ TEST_CASE("Tests BattleFleet Game Components","BattleFleet")
 	SECTION("Place Pins"){
 		BFBoard testBoard;
 		vector<BFShip> testShips;
+		vector<pin> testPins;
 
 		/**** Placing pins with no ships on board. ****/
 
-		//Place a pin on the board (0,0)
+		//Place a pin on the board (0,0),(1,1),(9,9)
 		REQUIRE(testBoard.placePin(0,0));
 		REQUIRE(testBoard.placePin(1,1));
 		REQUIRE(testBoard.placePin(9,9));
+
+		//Try to place duplicate pin - Fails
+		REQUIRE(!testBoard.placePin(0,0));
+		REQUIRE(!testBoard.placePin(1,1));
+		REQUIRE(!testBoard.placePin(9,9));
+
+		//Try to place pins off board
+		REQUIRE(!testBoard.placePin(20,20));
+		REQUIRE(!testBoard.placePin(10,10));
+		REQUIRE(!testBoard.placePin(5,11));
 	}
 
 
