@@ -121,3 +121,7 @@ bool BFBoard::placePin(unsigned int x, unsigned int y){
 	_pins.push_back(pin(x,y));
 	return true;
 }
+
+bool BFBoard::coordHasHit(unsigned int x, unsigned int y){
+	return true;
+}

@@ -85,7 +85,6 @@ TEST_CASE("Tests BattleFleet Game Components","BattleFleet")
 	SECTION("Place Pins"){
 		BFBoard testBoard;
 		vector<BFShip> testShips;
-		vector<pin> testPins;
 
 		/**** Placing pins with no ships on board. ****/
 
@@ -105,5 +104,25 @@ TEST_CASE("Tests BattleFleet Game Components","BattleFleet")
 		REQUIRE(!testBoard.placePin(5,11));
 	}
 
+	SECTION("Place Pins"){
+		BFBoard testBoard;
+		vector<BFShip> testShips;
 
+		REQUIRE(testBoard.placeShip(0,0,3,NORTH));
+		testShips.push_back(BFShip(0,0,3,NORTH));
+
+		/**** Placing pins - some hits, some misses ****/
+
+		//Place a pin on the board (0,0),(0,1),(1,1),(9,9)
+		REQUIRE(testBoard.placePin(0,0));
+		REQUIRE(testBoard.placePin(0,1));
+		REQUIRE(testBoard.placePin(1,1));
+		REQUIRE(testBoard.placePin(9,9));
+
+		//(0,0) and (0,1) are hits, rest misses
+		REQUIRE(testBoard.coordHasHit(0,0));
+		REQUIRE(testBoard.coordHasHit(0,1));
+		REQUIRE(!testBoard.coordHasHit(1,1));
+		REQUIRE(!testBoard.coordHasHit(9,9));
+	}
 }

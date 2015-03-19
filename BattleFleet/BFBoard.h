@@ -36,6 +36,7 @@ public:
     
 	bool placeShip(unsigned int x, unsigned int y, unsigned int length, unsigned int Direction);
 	bool placePin(unsigned int x, unsigned int y);
+	bool coordHasHit(unsigned int x, unsigned int y);
 	bool checkCollision (const BFShip & newShip) const;
 	const vector<BFShip> & getShips() const;
 
