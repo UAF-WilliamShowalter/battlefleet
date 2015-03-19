@@ -124,5 +124,6 @@ TEST_CASE("Tests BattleFleet Game Components","BattleFleet")
 		REQUIRE(testBoard.coordHasHit(0,1));
 		REQUIRE(!testBoard.coordHasHit(1,1));
 		REQUIRE(!testBoard.coordHasHit(9,9));
+		REQUIRE(!testBoard.coordHasHit(99,99));
 	}
 }

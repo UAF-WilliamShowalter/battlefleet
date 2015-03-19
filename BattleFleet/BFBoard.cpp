@@ -123,5 +123,15 @@ bool BFBoard::placePin(unsigned int x, unsigned int y){
 }
 
 bool BFBoard::coordHasHit(unsigned int x, unsigned int y){
-	return true;
+	pin pinToCheck = pin(x,y);
+	for (auto ship : _board)
+	{
+		coordinateSet shipCoordinates = getSpaces(ship);
+		for (auto coord = shipCoordinates.begin(); coord != shipCoordinates.end(); coord++){
+			if (pinToCheck.first == coord->first && pinToCheck.second == coord->second)
+				return true;
+		}
+	}
+
+	return false;
 }
