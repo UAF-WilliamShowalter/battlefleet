@@ -82,6 +82,17 @@ TEST_CASE("Tests BattleFleet Game Components","BattleFleet")
 
 	}
 
+	SECTION("Place Pins"){
+		BFBoard testBoard;
+		vector<BFShip> testShips;
+
+		/**** Placing pins with no ships on board. ****/
+
+		//Place a pin on the board (0,0)
+		REQUIRE(testBoard.placePin(0,0));
+		REQUIRE(testBoard.placePin(1,1));
+		REQUIRE(testBoard.placePin(9,9));
+	}
 
 
 }
