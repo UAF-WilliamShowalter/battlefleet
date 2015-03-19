@@ -146,3 +146,7 @@ bool BFBoard::coordHasHit(unsigned int x, unsigned int y){
 
 	return false;
 }
+
+bool BFBoard::checkAfloat (const BFShip & shipToCheck) const{
+	return true;
+}

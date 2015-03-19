@@ -129,4 +129,23 @@ TEST_CASE("Tests BattleFleet Game Components","BattleFleet")
 		//Test a would-be success when the pin hasn't been placed yet - returns false
 		REQUIRE(!testBoard.coordHasHit(0,2));
 	}
+
+	SECTION("Check If Ship Afloat"){
+		BFBoard testBoard;
+
+		REQUIRE(testBoard.placeShip(0,0,3,NORTH));
+
+		/**** Placing pins - some hits, some misses ****/
+
+		//Place a pin on the board (0,0),(0,1),(1,1),(9,9)
+		REQUIRE(testBoard.placePin(0,0));
+		REQUIRE(testBoard.placePin(0,1));
+
+		// Check and see if first ship (0,0,3,NORTH) is still afloat - should be floating.
+		REQUIRE(testBoard.checkAfloat(testBoard.getShips().front()));
+
+		REQUIRE(testBoard.placePin(0,2));
+		REQUIRE(testBoard.coordHasHit(0,2));
+		REQUIRE(!testBoard.checkAfloat(testBoard.getShips().front()));
+	}
 }
