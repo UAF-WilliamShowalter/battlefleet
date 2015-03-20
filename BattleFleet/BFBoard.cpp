@@ -8,13 +8,6 @@
 
 #include "BFBoard.h"
 
-bool BFBoard::gameEnded() {
-    
-    
-    return false;
-    
-}
-
 bool BFBoard::placeShip(unsigned int x, unsigned int y, unsigned int length, unsigned int direction){
     
     if ((x > 9) || (y > 9)){
@@ -171,3 +164,29 @@ unsigned int BFBoard::countHits() const{
 	}
 	return count;
 }
+
+
+unsigned int BFBoard::getPointsToHit() {
+    
+    return 0;
+    
+}
+
+bool BFBoard::gameEnded() {
+    
+    return false;
+    
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

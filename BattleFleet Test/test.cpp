@@ -204,7 +204,7 @@ TEST_CASE("Tests BattleFleet Game Components","BattleFleet")
 		REQUIRE(testBoard.countHits() == 8);
 	}
     
-    SECTION("Check if all ships are sunk and end the game") {
+    SECTION("Place all ships, sink them and end the game") {
         BFBoard testBoard;
         
         // Place all ships
