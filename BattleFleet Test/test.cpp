@@ -276,18 +276,18 @@ TEST_CASE("Tests BattleFleet Game Components","BattleFleet")
         REQUIRE(newGame.numberOfPlayers() == 2);
         
         // Setting player one's ships.
-        REQUIRE(newGame.placePlayerShips(PLAYERONE).placeShip(0, 0, 2, NORTH));
-        REQUIRE(newGame.placePlayerShips(PLAYERONE).placeShip(1, 0, 3, NORTH));
-        REQUIRE(newGame.placePlayerShips(PLAYERONE).placeShip(2, 0, 3, NORTH));
-        REQUIRE(newGame.placePlayerShips(PLAYERONE).placeShip(3, 0, 4, NORTH));
-        REQUIRE(newGame.placePlayerShips(PLAYERONE).placeShip(4, 0, 5, NORTH));
+        REQUIRE(newGame.placePlayerShips(PLAYERONE, 0, 0, 2, NORTH));
+        REQUIRE(newGame.placePlayerShips(PLAYERONE, 1, 0, 3, NORTH));
+        REQUIRE(newGame.placePlayerShips(PLAYERONE, 2, 0, 3, NORTH));
+        REQUIRE(newGame.placePlayerShips(PLAYERONE, 3, 0, 4, NORTH));
+        REQUIRE(newGame.placePlayerShips(PLAYERONE, 4, 0, 5, NORTH));
         
         // Setting player two's ships.
-        REQUIRE(newGame.placePlayerShips(PLAYERTWO).placeShip(0, 0, 2, NORTH));
-        REQUIRE(newGame.placePlayerShips(PLAYERTWO).placeShip(1, 0, 3, NORTH));
-        REQUIRE(newGame.placePlayerShips(PLAYERTWO).placeShip(2, 0, 3, NORTH));
-        REQUIRE(newGame.placePlayerShips(PLAYERTWO).placeShip(3, 0, 4, NORTH));
-        REQUIRE(newGame.placePlayerShips(PLAYERTWO).placeShip(4, 0, 5, NORTH));
+        REQUIRE(newGame.placePlayerShips(PLAYERTWO, 0, 0, 2, NORTH));
+        REQUIRE(newGame.placePlayerShips(PLAYERTWO, 1, 0, 3, NORTH));
+        REQUIRE(newGame.placePlayerShips(PLAYERTWO, 2, 0, 3, NORTH));
+        REQUIRE(newGame.placePlayerShips(PLAYERTWO, 3, 0, 4, NORTH));
+        REQUIRE(newGame.placePlayerShips(PLAYERTWO, 4, 0, 5, NORTH));
         
         // It should be player one's turn.
         REQUIRE(newGame.playerTurn(PLAYERONE));

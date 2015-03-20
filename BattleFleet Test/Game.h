@@ -9,10 +9,8 @@
 #ifndef __BattleFleet__Game__
 #define __BattleFleet__Game__
 
-#include <stdio.h>
 #include <vector>
 #include "BFBoard.h"
-#include "BFShip.h"
 
 using std::vector;
 
@@ -23,13 +21,13 @@ public:
     
     Game();
     unsigned long numberOfPlayers();
-    BFBoard & placePlayerShips(Player);
+    bool placePlayerShips(Player, unsigned int, unsigned int, unsigned int, Direction);
     bool attackOpponent(Player, unsigned int, unsigned int);
     
     bool playerTurn(Player);
     
 private:
-    vector<BFBoard> _BFGame;
+    vector<BFBoard> _boards;
     bool _turn;
     
 };

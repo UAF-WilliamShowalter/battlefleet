@@ -9,7 +9,6 @@
 #ifndef __BattleFleet__BFBoard__
 #define __BattleFleet__BFBoard__
 
-#include <stdio.h>
 #include <vector>
 #include <unordered_set>
 #include "BFShip.h"

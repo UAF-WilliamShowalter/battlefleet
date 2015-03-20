@@ -11,8 +11,8 @@
 Game::Game(){
     
     // Two boards for two players.
-    _BFGame.push_back(BFBoard());
-    _BFGame.push_back(BFBoard());
+    _boards.push_back(BFBoard());
+    _boards.push_back(BFBoard());
     
     _turn = false;
     
@@ -20,13 +20,13 @@ Game::Game(){
 
 unsigned long Game::numberOfPlayers() {
     
-    return _BFGame.size();
+    return _boards.size();
     
 }
 
-BFBoard & Game::placePlayerShips(Player player) {
+bool Game::placePlayerShips(Player player, unsigned int x , unsigned int y, unsigned int length, Direction direction) {
     
-    return _BFGame[player];
+    return (_boards[player].placeShip(x, y, length, direction));
     
 }
 
@@ -34,7 +34,7 @@ bool Game::attackOpponent(Player player, unsigned int x, unsigned int y) {
     
     if (player == _turn){
         
-        if (_BFGame[!player].placePin(x, y)){
+        if (_boards[!player].placePin(x, y)){
             _turn = !player;
             return true;
         }
@@ -45,7 +45,6 @@ bool Game::attackOpponent(Player player, unsigned int x, unsigned int y) {
     
     else
         return false;
-        
     
 }
 

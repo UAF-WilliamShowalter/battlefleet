@@ -9,7 +9,6 @@
 #ifndef __BattleFleet__BFShip__
 #define __BattleFleet__BFShip__
 
-#include <stdio.h>
 #include <utility>
 
 enum Direction { NORTH, EAST, SOUTH, WEST };
