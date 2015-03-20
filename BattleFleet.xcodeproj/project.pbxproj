@@ -47,6 +47,7 @@
 		3DF936FB1AA52A5F00059486 /* BattleFleet Test */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "BattleFleet Test"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3DF937031AA52B0C00059486 /* catch.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = catch.hpp; sourceTree = "<group>"; };
 		3DF937041AA52C7900059486 /* test.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = test.cpp; sourceTree = "<group>"; };
+		5718E6E31ABBD5F3003ACF85 /* Project Diary - Jacob.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = "Project Diary - Jacob.rtf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +72,7 @@
 			isa = PBXGroup;
 			children = (
 				3D875CB31AAA6B2300E3628F /* Project Diary - Will.txt */,
+				5718E6E31ABBD5F3003ACF85 /* Project Diary - Jacob.rtf */,
 				3DF936EC1AA5249400059486 /* BattleFleet */,
 				3DF936FC1AA52A5F00059486 /* BattleFleet Test */,
 				3DF936EB1AA5249400059486 /* Products */,
