@@ -203,4 +203,21 @@ TEST_CASE("Tests BattleFleet Game Components","BattleFleet")
 		REQUIRE(testBoard.placePin(7,4));
 		REQUIRE(testBoard.countHits() == 8);
 	}
+    
+    SECTION("Check if all ships are sunk and end the game") {
+        BFBoard testboard;
+        
+        // Place all ships
+        REQUIRE(testboard.placeShip(0, 0, 2, NORTH));
+        REQUIRE(testboard.placeShip(1, 0, 3, NORTH));
+        REQUIRE(testboard.placeShip(2, 0, 3, NORTH));
+        REQUIRE(testboard.placeShip(3, 0, 4, NORTH));
+        REQUIRE(testboard.placeShip(4, 0, 5, NORTH));
+        
+        
+        
+        
+        
+    }
+    
 }
