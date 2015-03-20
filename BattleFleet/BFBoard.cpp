@@ -17,13 +17,7 @@ bool BFBoard::gameEnded() {
 
 bool BFBoard::placeShip(unsigned int x, unsigned int y, unsigned int length, unsigned int direction){
     
-    if (x > 9) {
-        
-        return false;
-        
-    }
-    
-    if (y > 9) {
+    if ((x > 9) || (y > 9)){
         
         return false;
         

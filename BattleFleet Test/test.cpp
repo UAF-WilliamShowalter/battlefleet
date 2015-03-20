@@ -205,17 +205,47 @@ TEST_CASE("Tests BattleFleet Game Components","BattleFleet")
 	}
     
     SECTION("Check if all ships are sunk and end the game") {
-        BFBoard testboard;
+        BFBoard testBoard;
         
         // Place all ships
-        REQUIRE(testboard.placeShip(0, 0, 2, NORTH));
-        REQUIRE(testboard.placeShip(1, 0, 3, NORTH));
-        REQUIRE(testboard.placeShip(2, 0, 3, NORTH));
-        REQUIRE(testboard.placeShip(3, 0, 4, NORTH));
-        REQUIRE(testboard.placeShip(4, 0, 5, NORTH));
+        REQUIRE(testBoard.placeShip(0, 0, 2, NORTH));
+        REQUIRE(testBoard.placeShip(1, 0, 3, NORTH));
+        REQUIRE(testBoard.placeShip(2, 0, 3, NORTH));
+        REQUIRE(testBoard.placeShip(3, 0, 4, NORTH));
+        REQUIRE(testBoard.placeShip(4, 0, 5, NORTH));
         
+        // Hitting all ships
+        // PT Boat
+        REQUIRE(testBoard.placePin(0,0));
+        REQUIRE(testBoard.placePin(0,1));
+        REQUIRE(testBoard.countHits() == 2);
         
+        // Sub
+        REQUIRE(testBoard.placePin(1,0));
+        REQUIRE(testBoard.placePin(1,1));
+        REQUIRE(testBoard.placePin(1,2));
+        REQUIRE(testBoard.countHits() == 5);
         
+        // Cruiser
+        REQUIRE(testBoard.placePin(2,0));
+        REQUIRE(testBoard.placePin(2,1));
+        REQUIRE(testBoard.placePin(2,2));
+        REQUIRE(testBoard.countHits() == 8);
+        
+        // Destroyer
+        REQUIRE(testBoard.placePin(3,0));
+        REQUIRE(testBoard.placePin(3,1));
+        REQUIRE(testBoard.placePin(3,2));
+        REQUIRE(testBoard.placePin(3,3));
+        REQUIRE(testBoard.countHits() == 12);
+        
+        // Aircraft Carrier
+        REQUIRE(testBoard.placePin(4,0));
+        REQUIRE(testBoard.placePin(4,1));
+        REQUIRE(testBoard.placePin(4,2));
+        REQUIRE(testBoard.placePin(4,3));
+        REQUIRE(testBoard.placePin(4,4));
+        REQUIRE(testBoard.countHits() == 17);
         
         
     }
