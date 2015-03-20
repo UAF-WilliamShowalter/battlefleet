@@ -211,10 +211,15 @@ TEST_CASE("Tests BattleFleet Game Components","BattleFleet")
         REQUIRE(testBoard.placeShip(0, 0, 2, NORTH));
         REQUIRE(testBoard.placeShip(1, 0, 3, NORTH));
         
+        // Game should not be over, no pins placed.
+        REQUIRE(!testBoard.gameEnded());
+        
         REQUIRE(testBoard.placeShip(2, 0, 3, NORTH));
         REQUIRE(testBoard.placeShip(3, 0, 4, NORTH));
         REQUIRE(testBoard.placeShip(4, 0, 5, NORTH));
         
+        // Game should not be over, no pins placed.
+        REQUIRE(!testBoard.gameEnded());
         
         // Hitting all ships
         // PT Boat
@@ -222,17 +227,26 @@ TEST_CASE("Tests BattleFleet Game Components","BattleFleet")
         REQUIRE(testBoard.placePin(0,1));
         REQUIRE(testBoard.countHits() == 2);
         
+        // Game should not be over, only one ship sunk.
+        REQUIRE(!testBoard.gameEnded());
+        
         // Sub
         REQUIRE(testBoard.placePin(1,0));
         REQUIRE(testBoard.placePin(1,1));
         REQUIRE(testBoard.placePin(1,2));
         REQUIRE(testBoard.countHits() == 5);
         
+        // Game should not be over, only two ships sunk.
+        REQUIRE(!testBoard.gameEnded());
+        
         // Cruiser
         REQUIRE(testBoard.placePin(2,0));
         REQUIRE(testBoard.placePin(2,1));
         REQUIRE(testBoard.placePin(2,2));
         REQUIRE(testBoard.countHits() == 8);
+        
+        // Game should not be over, only three ships sunk.
+        REQUIRE(!testBoard.gameEnded());
         
         // Destroyer
         REQUIRE(testBoard.placePin(3,0));
@@ -241,6 +255,9 @@ TEST_CASE("Tests BattleFleet Game Components","BattleFleet")
         REQUIRE(testBoard.placePin(3,3));
         REQUIRE(testBoard.countHits() == 12);
         
+        // Game should not be over, only four ships sunk.
+        REQUIRE(!testBoard.gameEnded());
+        
         // Aircraft Carrier
         REQUIRE(testBoard.placePin(4,0));
         REQUIRE(testBoard.placePin(4,1));
@@ -248,6 +265,9 @@ TEST_CASE("Tests BattleFleet Game Components","BattleFleet")
         REQUIRE(testBoard.placePin(4,3));
         REQUIRE(testBoard.placePin(4,4));
         REQUIRE(testBoard.countHits() == 17);
+        
+        // Game should be over, all ships sunk
+        REQUIRE(testBoard.gameEnded());
         
         
     }

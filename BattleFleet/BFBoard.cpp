@@ -167,7 +167,14 @@ unsigned int BFBoard::countHits() const{
 
 bool BFBoard::gameEnded() {
     
-    return false;
+    for (auto ship = 0; ship < _board.size(); ship++) {
+        
+        if (checkAfloat(_board[ship]))
+            return false;
+
+    }
+    
+    return true;
     
 }
 
