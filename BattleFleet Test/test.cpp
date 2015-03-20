@@ -12,6 +12,7 @@
 #include <utility>
 #include "BFShip.h"
 #include "BFBoard.h"
+#include "Game.h"
 #include "catch.hpp"
 
 // Simple commit
@@ -268,6 +269,16 @@ TEST_CASE("Tests BattleFleet Game Components","BattleFleet")
         
         // Game should be over, all ships sunk
         REQUIRE(testBoard.gameEnded());
+    }
+    
+    SECTION("Start and actual game for Player VS Player"){
+        
+        
+        
+        
+        
+        
+        
         
         
     }

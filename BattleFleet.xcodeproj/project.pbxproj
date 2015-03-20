@@ -13,6 +13,7 @@
 		3DC0BB311AB25A7A00E0A7AC /* BFShip.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3DC0BB2E1AB25A7A00E0A7AC /* BFShip.cpp */; };
 		3DF936EE1AA5249400059486 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3DF936ED1AA5249400059486 /* main.cpp */; };
 		3DF937051AA52C7900059486 /* test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3DF937041AA52C7900059486 /* test.cpp */; };
+		571A74B01ABC008200446319 /* Game.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 571A74AE1ABC008200446319 /* Game.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -48,6 +49,8 @@
 		3DF937031AA52B0C00059486 /* catch.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = catch.hpp; sourceTree = "<group>"; };
 		3DF937041AA52C7900059486 /* test.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = test.cpp; sourceTree = "<group>"; };
 		5718E6E31ABBD5F3003ACF85 /* Project Diary - Jacob.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = "Project Diary - Jacob.rtf"; sourceTree = "<group>"; };
+		571A74AE1ABC008200446319 /* Game.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Game.cpp; sourceTree = "<group>"; };
+		571A74AF1ABC008200446319 /* Game.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Game.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,6 +107,8 @@
 			isa = PBXGroup;
 			children = (
 				3DF937041AA52C7900059486 /* test.cpp */,
+				571A74AE1ABC008200446319 /* Game.cpp */,
+				571A74AF1ABC008200446319 /* Game.h */,
 				3DF937031AA52B0C00059486 /* catch.hpp */,
 			);
 			path = "BattleFleet Test";
@@ -199,6 +204,7 @@
 				3DF937051AA52C7900059486 /* test.cpp in Sources */,
 				3D0C03AB1AB0ED2900E11260 /* BFBoard.cpp in Sources */,
 				3DC0BB311AB25A7A00E0A7AC /* BFShip.cpp in Sources */,
+				571A74B01ABC008200446319 /* Game.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
