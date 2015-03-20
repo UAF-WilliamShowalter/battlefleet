@@ -271,9 +271,12 @@ TEST_CASE("Tests BattleFleet Game Components","BattleFleet")
         REQUIRE(testBoard.gameEnded());
     }
     
-    SECTION("Start and actual game for Player VS Player"){
+    SECTION("Start a game for Player VS Player"){
         
+        Game newGame;
         
+        // Should have two boards for two players
+        REQUIRE(newGame.numberOfPlayers() == 2);
         
         
         

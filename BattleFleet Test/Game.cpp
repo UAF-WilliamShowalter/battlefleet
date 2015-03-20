@@ -7,3 +7,17 @@
 //
 
 #include "Game.h"
+
+Game::Game(){
+    
+    // Two boards for two players.
+    _BFGame.push_back(BFBoard());
+    _BFGame.push_back(BFBoard());
+    
+}
+
+unsigned long Game::numberOfPlayers() {
+    
+    return _BFGame.size();
+    
+}

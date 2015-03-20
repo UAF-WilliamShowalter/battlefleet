@@ -16,12 +16,16 @@
 
 using std::vector;
 
-class BFGame {
+enum Player { PLAYERONE, PLAYERTWO };
+
+class Game {
 public:
     
+    Game();
+    unsigned long numberOfPlayers();
     
 private:
-    vector<BFBoard> _game;
+    vector<BFBoard> _BFGame;
     
 };
 
