@@ -39,8 +39,6 @@ public:
 	bool checkCollision (const BFShip & newShip) const;
 	bool checkAfloat (const BFShip & shipToCheck) const;
     
-    bool gameEnded();
-    
 	const vector<BFShip> & getShips() const;
 	unsigned int countHits() const;
 

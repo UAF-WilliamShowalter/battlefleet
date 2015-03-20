@@ -25,6 +25,7 @@ public:
     bool attackOpponent(Player, unsigned int, unsigned int);
     
     bool playerTurn(Player);
+    bool hasEnded();
     
 private:
     vector<BFBoard> _boards;

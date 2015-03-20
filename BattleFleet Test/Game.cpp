@@ -53,3 +53,25 @@ bool Game::playerTurn(Player player){
     return (player == _turn);
     
 }
+
+bool Game::hasEnded() {
+    
+    for (auto ship = 0; ship < _boards[PLAYERONE].getShips().size(); ship++) {
+        
+        if (_boards[PLAYERONE].checkAfloat(_boards[PLAYERONE].getShips()[ship]))
+            return false;
+    
+    }
+    
+    for (auto ship = 0; ship < _boards[PLAYERTWO].getShips().size(); ship++) {
+        
+        if (_boards[PLAYERTWO].checkAfloat(_boards[PLAYERTWO].getShips()[ship]))
+            return false;
+        
+    }
+    
+    return true;
+    
+}
+
+
