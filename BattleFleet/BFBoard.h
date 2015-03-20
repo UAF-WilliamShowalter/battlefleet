@@ -39,6 +39,8 @@ public:
 	bool coordHasHit(unsigned int x, unsigned int y) const;
 	bool checkCollision (const BFShip & newShip) const;
 	bool checkAfloat (const BFShip & shipToCheck) const;
+    bool gameEnded();
+    
 	const vector<BFShip> & getShips() const;
 	unsigned int countHits() const;
 
@@ -46,6 +48,7 @@ private:
 	unordered_set<boardCoordinate,pair_hash> getSpaces(const BFShip & ship) const;
     vector<BFShip> _board;
 	vector<pin> _pins;
+    unsigned int shipsOnBoard_;
 };
 
 #endif /* defined(__BattleFleet__BFBoard__) */

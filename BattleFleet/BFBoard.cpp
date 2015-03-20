@@ -8,6 +8,13 @@
 
 #include "BFBoard.h"
 
+bool BFBoard::gameEnded() {
+    
+    
+    return false;
+    
+}
+
 bool BFBoard::placeShip(unsigned int x, unsigned int y, unsigned int length, unsigned int direction){
     
     if (x > 9) {
