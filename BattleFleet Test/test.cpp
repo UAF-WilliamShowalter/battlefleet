@@ -267,17 +267,29 @@ TEST_CASE("Tests BattleFleet Game Components","BattleFleet")
         REQUIRE(testBoard.placePin(4,4));
         REQUIRE(testBoard.countHits() == 17);
         
-        // Game should be over, all ships sunk
+        // Game should be over, all ships sunk.
         REQUIRE(testBoard.gameEnded());
     }
     
     SECTION("Start a game for Player VS Player"){
-        
         Game newGame;
         
         // Should have two boards for two players
         REQUIRE(newGame.numberOfPlayers() == 2);
         
+        // Setting player one's ships.
+        REQUIRE(newGame.placePlayerShips(PLAYERONE).placeShip(0, 0, 2, NORTH));
+        REQUIRE(newGame.placePlayerShips(PLAYERONE).placeShip(1, 0, 3, NORTH));
+        REQUIRE(newGame.placePlayerShips(PLAYERONE).placeShip(2, 0, 3, NORTH));
+        REQUIRE(newGame.placePlayerShips(PLAYERONE).placeShip(3, 0, 4, NORTH));
+        REQUIRE(newGame.placePlayerShips(PLAYERONE).placeShip(4, 0, 5, NORTH));
+        
+        // Setting player two's ships.
+        REQUIRE(newGame.placePlayerShips(PLAYERTWO).placeShip(0, 0, 2, NORTH));
+        REQUIRE(newGame.placePlayerShips(PLAYERTWO).placeShip(1, 0, 3, NORTH));
+        REQUIRE(newGame.placePlayerShips(PLAYERTWO).placeShip(2, 0, 3, NORTH));
+        REQUIRE(newGame.placePlayerShips(PLAYERTWO).placeShip(3, 0, 4, NORTH));
+        REQUIRE(newGame.placePlayerShips(PLAYERTWO).placeShip(4, 0, 5, NORTH));
         
         
         

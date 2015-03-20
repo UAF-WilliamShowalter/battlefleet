@@ -21,3 +21,15 @@ unsigned long Game::numberOfPlayers() {
     return _BFGame.size();
     
 }
+
+BFBoard & Game::placePlayerShips(Player player){
+    
+    return _BFGame[player];
+    
+}
+
+BFBoard & Game::getOpponentBoard(Player player){
+    
+    return _BFGame[!player];
+    
+}

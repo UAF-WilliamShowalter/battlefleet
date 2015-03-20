@@ -23,6 +23,8 @@ public:
     
     Game();
     unsigned long numberOfPlayers();
+    BFBoard & placePlayerShips(Player);
+    BFBoard & getOpponentBoard(Player);
     
 private:
     vector<BFBoard> _BFGame;
