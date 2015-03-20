@@ -264,6 +264,17 @@ TEST_CASE("Tests BattleFleet Game Components","BattleFleet")
         
         REQUIRE(newGame.hasEnded());
         
+        // Both players attempt to attack each other even after game ends!
+        // If the game were to continue, it would be player one's turn. The _gameEnded flag was set to true.
+        REQUIRE(!newGame.attackOpponent(PLAYERTWO, 9, 9));
+        REQUIRE(!newGame.attackOpponent(PLAYERONE, 9, 9));
+        
+        
+        
+        
+        
+        
+        
     }
     
 }

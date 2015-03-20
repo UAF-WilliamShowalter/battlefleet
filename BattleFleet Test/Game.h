@@ -30,6 +30,7 @@ public:
 private:
     vector<BFBoard> _boards;
     bool _turn;
+    bool _gameEnded;
     
 };
 

@@ -16,6 +16,7 @@ Game::Game(){
     _boards.push_back(BFBoard());
     
     _turn = false;
+    _gameEnded = false;
     
 }
 
@@ -33,7 +34,7 @@ bool Game::placePlayerShips(Player player, unsigned int x , unsigned int y, unsi
 
 bool Game::attackOpponent(Player player, unsigned int x, unsigned int y) {
     
-    if (player == _turn){
+    if ((player == _turn) && (_gameEnded == false)){
         
         if (_boards[!player].placePin(x, y)){
             _turn = !player;
@@ -64,6 +65,7 @@ bool Game::hasEnded() {
         shipsSunk += !_boards[PLAYERONE].checkAfloat(_boards[PLAYERONE].getShips()[ship]);
         
         if (shipsSunk == _boards[PLAYERONE].getShips().size()) {
+            _gameEnded = true;
             return true;
         }
     
@@ -76,10 +78,13 @@ bool Game::hasEnded() {
         shipsSunk += !_boards[PLAYERTWO].checkAfloat(_boards[PLAYERTWO].getShips()[ship]);
         
         if (shipsSunk == _boards[PLAYERTWO].getShips().size()) {
+            _gameEnded = true;
             return true;
         }
         
     }
+    
+    
     
     return false;
     
