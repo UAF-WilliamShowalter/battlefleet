@@ -24,10 +24,13 @@ public:
     Game();
     unsigned long numberOfPlayers();
     BFBoard & placePlayerShips(Player);
-    BFBoard & getOpponentBoard(Player);
+    bool attackOpponent(Player, unsigned int, unsigned int);
+    
+    bool playerTurn(Player);
     
 private:
     vector<BFBoard> _BFGame;
+    bool _turn;
     
 };
 

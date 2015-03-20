@@ -15,8 +15,6 @@
 #include "Game.h"
 #include "catch.hpp"
 
-// Simple commit
-
 TEST_CASE("Tests BattleFleet Game Components","BattleFleet")
 {
 	SECTION("Individual Ship Placement test"){
@@ -290,6 +288,45 @@ TEST_CASE("Tests BattleFleet Game Components","BattleFleet")
         REQUIRE(newGame.placePlayerShips(PLAYERTWO).placeShip(2, 0, 3, NORTH));
         REQUIRE(newGame.placePlayerShips(PLAYERTWO).placeShip(3, 0, 4, NORTH));
         REQUIRE(newGame.placePlayerShips(PLAYERTWO).placeShip(4, 0, 5, NORTH));
+        
+        // It should be player one's turn.
+        REQUIRE(newGame.playerTurn(PLAYERONE));
+        
+        // Player two is trying to cheat by saying it's his turn.
+        REQUIRE(!newGame.playerTurn(PLAYERTWO));
+        
+        // Player one places a pin. The next turn should belong to player two.
+        REQUIRE(newGame.attackOpponent(PLAYERONE, 0, 0));
+        
+        // Player one wants to know if his turn is over and it is.
+        REQUIRE(!newGame.playerTurn(PLAYERONE));
+        
+        // Player one tries to place another pin anyway, but fails because it wasn't his turn.
+        REQUIRE(!newGame.attackOpponent(PLAYERONE, 0, 1));
+        
+        // Player two checks to see if it's his turn.
+        REQUIRE(newGame.playerTurn(PLAYERTWO));
+        
+        // Player two places a pin now.
+        REQUIRE(newGame.attackOpponent(PLAYERTWO, 0, 0));
+        
+        // The audience wants to know who's turn it is now (should now be player one's turn).
+        REQUIRE(newGame.playerTurn(PLAYERONE));
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         
         
         

@@ -14,6 +14,8 @@ Game::Game(){
     _BFGame.push_back(BFBoard());
     _BFGame.push_back(BFBoard());
     
+    _turn = false;
+    
 }
 
 unsigned long Game::numberOfPlayers() {
@@ -22,14 +24,33 @@ unsigned long Game::numberOfPlayers() {
     
 }
 
-BFBoard & Game::placePlayerShips(Player player){
+BFBoard & Game::placePlayerShips(Player player) {
     
     return _BFGame[player];
     
 }
 
-BFBoard & Game::getOpponentBoard(Player player){
+bool Game::attackOpponent(Player player, unsigned int x, unsigned int y) {
     
-    return _BFGame[!player];
+    if (player == _turn){
+        
+        if (_BFGame[!player].placePin(x, y)){
+            _turn = !player;
+            return true;
+        }
+        else
+            return false;
+        
+    }
+    
+    else
+        return false;
+        
+    
+}
+
+bool Game::playerTurn(Player player){
+    
+    return (player == _turn);
     
 }

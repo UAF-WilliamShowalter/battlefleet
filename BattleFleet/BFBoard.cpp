@@ -8,6 +8,7 @@
 
 #include "BFBoard.h"
 
+
 bool BFBoard::placeShip(unsigned int x, unsigned int y, unsigned int length, unsigned int direction){
     
     if ((x > 9) || (y > 9)){
@@ -112,6 +113,7 @@ bool BFBoard::placePin(unsigned int x, unsigned int y){
 		if ((BF_BOARD_SIZE <= x) || (BF_BOARD_SIZE <= y))
 			return false;
 	}
+    
 	_pins.push_back(pin(x,y));
 	return true;
 }
