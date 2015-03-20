@@ -50,7 +50,6 @@ private:
 	unordered_set<boardCoordinate,pair_hash> getSpaces(const BFShip & ship) const;
     vector<BFShip> _board;
 	vector<pin> _pins;
-    unsigned int pointsToHit_;
 };
 
 #endif /* defined(__BattleFleet__BFBoard__) */

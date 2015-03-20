@@ -165,13 +165,6 @@ unsigned int BFBoard::countHits() const{
 	return count;
 }
 
-
-unsigned int BFBoard::getPointsToHit() {
-    
-    return 0;
-    
-}
-
 bool BFBoard::gameEnded() {
     
     return false;

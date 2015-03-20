@@ -210,9 +210,11 @@ TEST_CASE("Tests BattleFleet Game Components","BattleFleet")
         // Place all ships
         REQUIRE(testBoard.placeShip(0, 0, 2, NORTH));
         REQUIRE(testBoard.placeShip(1, 0, 3, NORTH));
+        
         REQUIRE(testBoard.placeShip(2, 0, 3, NORTH));
         REQUIRE(testBoard.placeShip(3, 0, 4, NORTH));
         REQUIRE(testBoard.placeShip(4, 0, 5, NORTH));
+        
         
         // Hitting all ships
         // PT Boat
