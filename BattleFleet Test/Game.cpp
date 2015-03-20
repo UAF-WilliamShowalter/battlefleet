@@ -6,6 +6,7 @@
 //  Copyright (c) 2015 UAF CS372. All rights reserved.
 //
 
+#include <iostream>
 #include "Game.h"
 
 Game::Game(){
@@ -56,22 +57,31 @@ bool Game::playerTurn(Player player){
 
 bool Game::hasEnded() {
     
+    unsigned int shipsSunk = 0;
+    
     for (auto ship = 0; ship < _boards[PLAYERONE].getShips().size(); ship++) {
         
-        if (_boards[PLAYERONE].checkAfloat(_boards[PLAYERONE].getShips()[ship]))
-            return false;
+        shipsSunk += !_boards[PLAYERONE].checkAfloat(_boards[PLAYERONE].getShips()[ship]);
+        
+        if (shipsSunk == _boards[PLAYERONE].getShips().size()) {
+            return true;
+        }
     
     }
+    
+    shipsSunk = 0;
     
     for (auto ship = 0; ship < _boards[PLAYERTWO].getShips().size(); ship++) {
         
-        if (_boards[PLAYERTWO].checkAfloat(_boards[PLAYERTWO].getShips()[ship]))
-            return false;
+        shipsSunk += !_boards[PLAYERTWO].checkAfloat(_boards[PLAYERTWO].getShips()[ship]);
+        
+        if (shipsSunk == _boards[PLAYERTWO].getShips().size()) {
+            return true;
+        }
         
     }
     
-    return true;
+    return false;
     
 }
-
 

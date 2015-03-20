@@ -212,16 +212,10 @@ TEST_CASE("Tests BattleFleet Game Components","BattleFleet")
         // Setting player one's ships.
         REQUIRE(newGame.placePlayerShips(PLAYERONE, 0, 0, 2, NORTH));
         REQUIRE(newGame.placePlayerShips(PLAYERONE, 1, 0, 3, NORTH));
-        REQUIRE(newGame.placePlayerShips(PLAYERONE, 2, 0, 3, NORTH));
-        REQUIRE(newGame.placePlayerShips(PLAYERONE, 3, 0, 4, NORTH));
-        REQUIRE(newGame.placePlayerShips(PLAYERONE, 4, 0, 5, NORTH));
         
         // Setting player two's ships.
         REQUIRE(newGame.placePlayerShips(PLAYERTWO, 0, 0, 2, NORTH));
         REQUIRE(newGame.placePlayerShips(PLAYERTWO, 1, 0, 3, NORTH));
-        REQUIRE(newGame.placePlayerShips(PLAYERTWO, 2, 0, 3, NORTH));
-        REQUIRE(newGame.placePlayerShips(PLAYERTWO, 3, 0, 4, NORTH));
-        REQUIRE(newGame.placePlayerShips(PLAYERTWO, 4, 0, 5, NORTH));
         
         // It should be player one's turn.
         REQUIRE(newGame.playerTurn(PLAYERONE));
@@ -238,6 +232,10 @@ TEST_CASE("Tests BattleFleet Game Components","BattleFleet")
         // Player one tries to place another pin anyway, but fails because it wasn't his turn.
         REQUIRE(!newGame.attackOpponent(PLAYERONE, 0, 1));
         
+        // Someone yells that the game is over, but it's not.
+        
+        REQUIRE(!newGame.hasEnded());
+        
         // Player two checks to see if it's his turn.
         REQUIRE(newGame.playerTurn(PLAYERTWO));
         
@@ -247,7 +245,24 @@ TEST_CASE("Tests BattleFleet Game Components","BattleFleet")
         // The audience wants to know who's turn it is now (should now be player one's turn).
         REQUIRE(newGame.playerTurn(PLAYERONE));
         
-    
+        // Player one attempt to attack the same spot again, turn does not end though.
+        REQUIRE(!newGame.attackOpponent(PLAYERONE, 0, 0));
+        REQUIRE(newGame.playerTurn(PLAYERONE));
+        
+        // The game gets serious and the players play aggressively.
+        REQUIRE(newGame.attackOpponent(PLAYERONE, 0, 1));
+        REQUIRE(newGame.attackOpponent(PLAYERTWO, 0, 1));
+        
+        REQUIRE(newGame.attackOpponent(PLAYERONE, 1, 0));
+        REQUIRE(newGame.attackOpponent(PLAYERTWO, 5, 4));
+        
+        REQUIRE(newGame.attackOpponent(PLAYERONE, 1, 1));
+        REQUIRE(newGame.attackOpponent(PLAYERTWO, 4, 8));
+        
+        // Player one takes the win!
+        REQUIRE(newGame.attackOpponent(PLAYERONE, 1, 2));
+        
+        REQUIRE(newGame.hasEnded());
         
     }
     
