@@ -233,7 +233,6 @@ TEST_CASE("Tests BattleFleet Game Components","BattleFleet")
         REQUIRE(!newGame.attackOpponent(PLAYERONE, 0, 1));
         
         // Someone yells that the game is over, but it's not.
-        
         REQUIRE(!newGame.hasEnded());
         
         // Player two checks to see if it's his turn.

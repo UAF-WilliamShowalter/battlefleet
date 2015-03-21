@@ -15,7 +15,7 @@ Game::Game(){
     _boards.push_back(BFBoard());
     _boards.push_back(BFBoard());
     
-    _turn = false;
+    _turn = false; // Player one starts the game always.
     _gameEnded = false;
     
 }
@@ -26,7 +26,7 @@ unsigned long Game::numberOfPlayers() {
     
 }
 
-bool Game::placePlayerShips(Player player, unsigned int x , unsigned int y, unsigned int length, Direction direction) {
+bool Game::placePlayerShips(Player player, unsigned int x, unsigned int y, unsigned int length, Direction direction) {
     
     return (_boards[player].placeShip(x, y, length, direction));
     
@@ -83,8 +83,6 @@ bool Game::hasEnded() {
         }
         
     }
-    
-    
     
     return false;
     
