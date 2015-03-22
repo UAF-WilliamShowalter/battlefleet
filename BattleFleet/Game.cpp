@@ -36,11 +36,11 @@ bool Game::attackOpponent(Player player, unsigned int x, unsigned int y) {
     
     if ((player == _turn) && (_gameEnded == false)){
         
-        if (_boards[!player].placePin(x, y)){
-			switchPlayer();
+        if (_boards[getInactivePlayer()].placePin(x, y)){
             
             _gameEnded = (_boards[PLAYERONE].playerHasLost() || _boards[PLAYERTWO].playerHasLost());
             return true;
+            
         }
         else
             return false;
@@ -52,9 +52,19 @@ bool Game::attackOpponent(Player player, unsigned int x, unsigned int y) {
     
 }
 
-Player Game::playerTurn(){
+Player Game::playerTurn() const{
     
     return _turn;
+    
+}
+
+Player Game::getInactivePlayer() const {
+    
+    if (_turn == PLAYERONE)
+        return PLAYERTWO;
+    
+    else
+        return PLAYERONE;
     
 }
 
@@ -77,3 +87,4 @@ void Game::switchPlayer() {
 		_turn = PLAYERONE;
 	}
 }
+

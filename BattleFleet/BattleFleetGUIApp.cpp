@@ -16,7 +16,7 @@ using namespace ci::app;
 
 using std::vector;
 
-enum GameStatus { MENU, SETUPGAME, PLAYERSWITCHSETUP, INGAME, INGAMESWITCH };
+enum GameStatus { MENU, SETUPGAME, PLAYERSWITCHSETUP, INGAME, INGAMESWITCH, INGAMESHOWPIN };
 
 const int X_OFFSET = 105;
 const int Y_OFFSET = 105;
@@ -31,6 +31,7 @@ public:
     void mouseDown( MouseEvent event );
     void update();
     void draw();
+    void drawInactivePlayerPins();
 	void drawActivePlayerShips();
 	void drawBackground();
     
@@ -173,7 +174,28 @@ void BattleFleetGUIApp::mouseDown( MouseEvent event ) {
             break;
         }
             
+        case INGAME: {
             
+            if ((event.getX() >= X_OFFSET) && (event.getX() <= X_OFFSET+BOARD_SIZE) &&
+                (event.getY() >= Y_OFFSET) && (event.getY() <= Y_OFFSET+BOARD_SIZE)) {
+                
+                unsigned int x_coord = (event.getX()-X_OFFSET)/SQUARE_SIZE;
+                unsigned int y_coord = (event.getY()-Y_OFFSET)/SQUARE_SIZE;
+                
+                _game.attackOpponent(_game.playerTurn(), x_coord, y_coord);
+                
+                _inGameStatus = INGAMESHOWPIN;
+            }
+            
+            break;
+        }
+            
+        case INGAMESHOWPIN: {
+         
+            _inGameStatus = INGAMESWITCH;
+            
+            break;
+        }
             
     }
 }
@@ -223,9 +245,28 @@ void BattleFleetGUIApp::draw() {
             break;
         }
             
+        case INGAME: {
+            
+            gl::clear();
+            drawBackground();
+            drawActivePlayerShips();
+            drawInactivePlayerPins();
+            
+            break;
+        }
+            
+        case INGAMESHOWPIN: {
+            
+            gl::clear();
+            drawBackground();
+            drawActivePlayerShips();
+            drawInactivePlayerPins();
+            
+            break;
+        }
+            
+            
     }
-    
-    
 }
 
 void BattleFleetGUIApp::drawActivePlayerShips()
@@ -245,6 +286,13 @@ void BattleFleetGUIApp::drawBackground()
 {
 	gl::draw( _backGround, Area( 0, 0, 800, 800) );// Player 1 board
 	gl::draw( _backGround, Area( 800, 0, 1600, 800) );// Player 2 board
+}
+
+void BattleFleetGUIApp::drawInactivePlayerPins() {
+    
+    
+    
+    
 }
 
 CINDER_APP_NATIVE( BattleFleetGUIApp, RendererGl )
