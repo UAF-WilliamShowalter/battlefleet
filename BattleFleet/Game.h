@@ -28,7 +28,7 @@ public:
     Player getInactivePlayer() const;
     Player playerTurn() const;
     bool hasEnded();
-	void switchPlayer();
+	bool switchPlayer();
     
 private:
     vector<BFBoard> _boards;

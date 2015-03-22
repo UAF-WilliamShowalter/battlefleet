@@ -79,12 +79,17 @@ const vector<BFShip> & Game::getPlayerShips(Player player) const
 	return _boards[player].getShips();
 }
 
-void Game::switchPlayer() {
+bool Game::switchPlayer() {
 	if (_turn == PLAYERONE){
 		_turn = PLAYERTWO;
 	}
 	else {
 		_turn = PLAYERONE;
 	}
+
+	// Returning true allows for the use of statements like:
+	// (Game->attackOpponent(Player, X, Y) && Game->switchPlayer());
+	// Where the switch player only executes after a successful attach placement.
+	return true;
 }
 
