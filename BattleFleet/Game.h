@@ -25,6 +25,9 @@ public:
     bool attackOpponent(Player, unsigned int, unsigned int);
 	const vector<BFShip> & getPlayerShips(Player player) const;
     
+    const vector<pin> getPlayerMissPins(Player player) const;
+    const vector<pin> getPlayerHitPins(Player player) const;
+    
     Player getInactivePlayer() const;
     Player playerTurn() const;
     bool hasEnded();

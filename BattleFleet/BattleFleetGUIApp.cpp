@@ -16,13 +16,14 @@ using namespace ci::app;
 
 using std::vector;
 
-enum GameStatus { MENU, SETUPGAME, PLAYERSWITCHSETUP, INGAME, INGAMESWITCH, INGAMESHOWPIN };
+enum GameStatus { MENU, SETUPGAME, PLAYERSWITCHSETUP, INGAME, INGAMESWITCH, INGAMESHOWPIN, GAMEOVER };
 
 const int X_OFFSET = 105;
 const int Y_OFFSET = 105;
 const int BOARD_SIZE = 660;
 const int SQUARE_SIZE = BOARD_SIZE/BF_BOARD_SIZE;
 const int BETWEEN_BOARDS = 800;
+const int MAX_SHIPS = 8;
 
 class BattleFleetGUIApp : public AppNative {
 public:
@@ -31,8 +32,8 @@ public:
     void mouseDown( MouseEvent event );
     void update();
     void draw();
-    void drawInactivePlayerPins();
-	void drawActivePlayerShips();
+    void drawPlayerPins(Player player);
+	void drawPlayerShips(Player player);
 	void drawBackground();
     
 private:
@@ -140,7 +141,7 @@ void BattleFleetGUIApp::mouseDown( MouseEvent event ) {
                 console() << "player one set his ship up\n";
                 console() << event.getPos();
 
-				if (!(_game.getPlayerShips(_game.playerTurn()).size()<5))
+				if (!(_game.getPlayerShips(_game.playerTurn()).size() < MAX_SHIPS))
 				{
 					if (_game.playerTurn() == PLAYERONE)
 					{
@@ -182,17 +183,24 @@ void BattleFleetGUIApp::mouseDown( MouseEvent event ) {
                 unsigned int x_coord = (event.getX()-X_OFFSET)/SQUARE_SIZE;
                 unsigned int y_coord = (event.getY()-Y_OFFSET)/SQUARE_SIZE;
                 
-                _game.attackOpponent(_game.playerTurn(), x_coord, y_coord);
+                if (_game.attackOpponent(_game.playerTurn(), x_coord, y_coord))
+                    _inGameStatus = INGAMESHOWPIN;
                 
-                _inGameStatus = INGAMESHOWPIN;
             }
             
             break;
         }
             
         case INGAMESHOWPIN: {
-         
+            
+            _game.switchPlayer();
             _inGameStatus = INGAMESWITCH;
+            
+            if (_game.hasEnded()){
+                
+                _inGameStatus = GAMEOVER;
+                
+            }
             
             break;
         }
@@ -222,7 +230,7 @@ void BattleFleetGUIApp::draw() {
             
             gl::clear();
             drawBackground();
-            drawActivePlayerShips();
+            drawPlayerShips(_game.playerTurn());
             
             break;
             
@@ -249,8 +257,10 @@ void BattleFleetGUIApp::draw() {
             
             gl::clear();
             drawBackground();
-            drawActivePlayerShips();
-            drawInactivePlayerPins();
+            drawPlayerShips(_game.playerTurn());
+            drawPlayerPins(_game.playerTurn());
+            
+            drawPlayerPins(_game.getInactivePlayer());
             
             break;
         }
@@ -259,24 +269,48 @@ void BattleFleetGUIApp::draw() {
             
             gl::clear();
             drawBackground();
-            drawActivePlayerShips();
-            drawInactivePlayerPins();
+            drawPlayerShips(_game.playerTurn());
+            drawPlayerPins(_game.playerTurn());
+            
+            drawPlayerPins(_game.getInactivePlayer());
             
             break;
         }
             
+        case GAMEOVER: {
+            
+            gl::clear();
+            drawBackground();
+            
+            drawPlayerShips(PLAYERONE);
+            drawPlayerShips(PLAYERTWO);
+            
+            drawPlayerPins(PLAYERONE);
+            drawPlayerPins(PLAYERTWO);
+            
+            
+            break;
+        }
             
     }
 }
 
-void BattleFleetGUIApp::drawActivePlayerShips()
+void BattleFleetGUIApp::drawPlayerShips(Player player)
 {
-	for (auto ship : _game.getPlayerShips(_game.playerTurn()))
+    
+    unsigned int screenOffset = BETWEEN_BOARDS;
+    
+    if ((player == PLAYERONE) && (_game.hasEnded()))
+        screenOffset = 0;
+        
+
+    
+	for (auto ship : _game.getPlayerShips(player))
 	{
 		boardCoordinate shipCoords = ship.getPosition();
-		gl::draw( _shipImages[0], Rectf(shipCoords.first*SQUARE_SIZE+X_OFFSET+BETWEEN_BOARDS,
+		gl::draw( _shipImages[0], Rectf(shipCoords.first*SQUARE_SIZE+X_OFFSET+ screenOffset,
 										shipCoords.second*SQUARE_SIZE+Y_OFFSET,
-										(shipCoords.first+1)*SQUARE_SIZE+X_OFFSET-5+BETWEEN_BOARDS,
+										(shipCoords.first+1)*SQUARE_SIZE+X_OFFSET-5+ screenOffset,
 										(shipCoords.second+1)*SQUARE_SIZE+Y_OFFSET-5));
 
 	}
@@ -288,10 +322,44 @@ void BattleFleetGUIApp::drawBackground()
 	gl::draw( _backGround, Area( 800, 0, 1600, 800) );// Player 2 board
 }
 
-void BattleFleetGUIApp::drawInactivePlayerPins() {
+void BattleFleetGUIApp::drawPlayerPins(Player player) {
     
+    unsigned int screenOffset = 0;
     
+    if (player == _game.playerTurn()){
     
+        screenOffset = BETWEEN_BOARDS;
+        
+    }
+    
+    if (_game.hasEnded()){
+        
+        if (player == PLAYERONE)
+            screenOffset = 0;
+        else
+            screenOffset = BETWEEN_BOARDS;
+    
+    }
+    
+    for (auto pin : _game.getPlayerMissPins(player) )
+    {
+        
+        gl::draw( _pinType[0], Rectf(pin.first*SQUARE_SIZE+X_OFFSET + screenOffset,
+                                        pin.second*SQUARE_SIZE+Y_OFFSET,
+                                        (pin.first+1)*SQUARE_SIZE+X_OFFSET-5 + screenOffset,
+                                        (pin.second+1)*SQUARE_SIZE+Y_OFFSET-5));
+        
+    }
+    
+    for (auto pin : _game.getPlayerHitPins(player) )
+    {
+        
+        gl::draw( _pinType[1], Rectf(pin.first*SQUARE_SIZE+X_OFFSET + screenOffset,
+                                     pin.second*SQUARE_SIZE+Y_OFFSET,
+                                     (pin.first+1)*SQUARE_SIZE+X_OFFSET-5 + screenOffset,
+                                     (pin.second+1)*SQUARE_SIZE+Y_OFFSET-5));
+        
+    }
     
 }
 

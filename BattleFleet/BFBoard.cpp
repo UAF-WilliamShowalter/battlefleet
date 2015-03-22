@@ -190,6 +190,38 @@ bool BFBoard::playerHasLost() const {
     return false;
 }
 
+vector<pin> BFBoard::getHits() const {
+    
+    vector<pin> hits;
+    
+    for (auto pin : _pins)
+    {
+        
+        if (coordHasHit(pin.first,pin.second))
+           hits.push_back(pin);
+        
+    }
+    
+    return hits;
+    
+}
 
+
+vector<pin> BFBoard::getMisses() const {
+    
+    vector<pin> misses;
+    
+    for (auto pin : _pins)
+    {
+        
+        if (!coordHasHit(pin.first,pin.second))
+            misses.push_back(pin);
+        
+    }
+    
+    return misses;
+
+    
+}
 
 

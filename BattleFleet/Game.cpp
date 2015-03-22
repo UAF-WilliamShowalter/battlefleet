@@ -93,3 +93,15 @@ bool Game::switchPlayer() {
 	return true;
 }
 
+const vector<pin> Game::getPlayerMissPins(Player player) const{
+    
+    return _boards[player].getMisses();
+    
+}
+
+const vector<pin> Game::getPlayerHitPins(Player player) const {
+    
+    return _boards[player].getHits();
+    
+}
+

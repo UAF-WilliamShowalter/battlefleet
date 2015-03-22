@@ -43,6 +43,9 @@ public:
 	unsigned int countHits() const;
     
     bool playerHasLost() const;
+    
+    vector<pin> getHits() const;
+    vector<pin> getMisses() const;
 
 private:
 	coordinateSet getSpaces(const BFShip & ship) const;
