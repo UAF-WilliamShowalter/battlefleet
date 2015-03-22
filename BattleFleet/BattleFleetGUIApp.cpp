@@ -18,10 +18,11 @@ using std::vector;
 
 enum GameStatus { NOTINGAME, STARTINGGAME, SETUPGAME, INGAME };
 
-const int X_OFFSET = 505;
+const int X_OFFSET = 105;
 const int Y_OFFSET = 105;
 const int BOARD_SIZE = 660;
 const int SQUARE_SIZE = BOARD_SIZE/BF_BOARD_SIZE;
+const int BETWEEN_BOARDS = 800;
 
 class BattleFleetGUIApp : public AppNative {
 public:
@@ -30,7 +31,7 @@ public:
     void mouseDown( MouseEvent event );
     void update();
     void draw();
-	void drawPlayerShips(Player);
+	void drawActivePlayerShips();
 	void drawBackground();
     
 private:
@@ -125,7 +126,7 @@ void BattleFleetGUIApp::mouseDown( MouseEvent event ) {
             // you can place ships or pins by changing the name and the index.
 			drawBackground();
 
-            if ((event.getX() >= X_OFFSET ) && (event.getX() <= X_OFFSET+BOARD_SIZE) &&
+            if ((event.getX() >= X_OFFSET) && (event.getX() <= X_OFFSET+BOARD_SIZE) &&
 				(event.getY() >= Y_OFFSET) && (event.getY() <= Y_OFFSET+BOARD_SIZE)) {
 
 				unsigned int x_coord = (event.getX()-X_OFFSET)/SQUARE_SIZE;
@@ -150,7 +151,7 @@ void BattleFleetGUIApp::mouseDown( MouseEvent event ) {
 				}
             }
 
-			drawPlayerShips(_game.playerTurn());
+			drawActivePlayerShips();
 
             break;
 
@@ -183,8 +184,8 @@ void BattleFleetGUIApp::draw() {
             gl::clear();
             
             // x1, y1, x2, y2
-            gl::draw( _backGround, Area( 400, 0, 1200, 800) );// Centered board
-            
+
+			drawBackground();
             
             // 660 by 660
             //
@@ -209,20 +210,23 @@ void BattleFleetGUIApp::draw() {
     
 }
 
-void BattleFleetGUIApp::drawPlayerShips(Player player)
+void BattleFleetGUIApp::drawActivePlayerShips()
 {
-	for (auto ship : _game.getPlayerShips(player))
+	for (auto ship : _game.getPlayerShips(_game.playerTurn()))
 	{
 		boardCoordinate shipCoords = ship.getPosition();
-		gl::draw( _shipImages[0], Rectf(shipCoords.first*SQUARE_SIZE+X_OFFSET, shipCoords.second*SQUARE_SIZE+Y_OFFSET,
-										(shipCoords.first+1)*SQUARE_SIZE+X_OFFSET-5, (shipCoords.second+1)*SQUARE_SIZE+Y_OFFSET-5));
+		gl::draw( _shipImages[0], Rectf(shipCoords.first*SQUARE_SIZE+X_OFFSET+BETWEEN_BOARDS,
+										shipCoords.second*SQUARE_SIZE+Y_OFFSET,
+										(shipCoords.first+1)*SQUARE_SIZE+X_OFFSET-5+BETWEEN_BOARDS,
+										(shipCoords.second+1)*SQUARE_SIZE+Y_OFFSET-5));
 
 	}
 }
 
 void BattleFleetGUIApp::drawBackground()
 {
-	gl::draw( _backGround, Area( 400, 0, 1200, 800) );// Centered board
+	gl::draw( _backGround, Area( 0, 0, 800, 800) );// Player 1 board
+	gl::draw( _backGround, Area( 800, 0, 1600, 800) );// Player 2 board
 }
 
 CINDER_APP_NATIVE( BattleFleetGUIApp, RendererGl )
