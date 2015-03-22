@@ -28,6 +28,8 @@ public:
     
 private:
     
+    Game _game;
+    
     int _inGameStatus;
     gl::Texture _backGround;
     
@@ -51,8 +53,6 @@ void BattleFleetGUIApp::setup() {
     _playerView.push_back(gl::Fbo(1600, 800));
     
     _inGameStatus = NOTINGAME;
-    
-    console() << _inGameStatus;
       
     TextLayout title;
     title.setFont( Font("Arial", 36 ) );
@@ -117,7 +117,7 @@ void BattleFleetGUIApp::mouseDown( MouseEvent event ) {
 
             // you can place ships or pins by changing the name and the index.
         
-            if (event.isLeft()) {
+            if ((event.getX() >= 505) && (event.getX() <= 1165) && (event.getY() >= 105) && (event.getY() <= 765)) {
                 
                 console() << "player one set his ship up\n";
                 gl::draw( _shipImages[0], Rectf(event.getX() - 25, event.getY() - 25, event.getX() + 25, event.getY() + 25));
@@ -162,9 +162,19 @@ void BattleFleetGUIApp::draw() {
         case STARTINGGAME: {
             
             gl::clear();
+            
+            // x1, y1, x2, y2
             gl::draw( _backGround, Area( 400, 0, 1200, 800) );// Centered board
-            //gl::drawSolidRect( Rectf( 505, 765, 1165, 105));
-            gl::setViewport( Area( 0, 800, 1600, 0));
+            
+            
+            // 660 by 660
+            //
+            // gl::drawSolidRect( Rectf( 505, 765, 1165, 105));
+            
+            
+            
+            
+            //gl::setViewport( Area( 0, 800, 1600, 0));
             
             _inGameStatus = SETUPGAME;
             break;
