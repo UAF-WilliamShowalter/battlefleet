@@ -43,6 +43,8 @@ bool Game::attackOpponent(Player player, unsigned int x, unsigned int y) {
 			else {
 				_turn = PLAYERONE;
 			}
+            
+            _gameEnded = (_boards[PLAYERONE].playerHasLost() || _boards[PLAYERTWO].playerHasLost());
             return true;
         }
         else
@@ -63,33 +65,25 @@ Player Game::playerTurn(){
 
 bool Game::hasEnded() {
     
-    unsigned int shipsSunk = 0;
-    
-	for (auto ship : _boards[PLAYERONE].getShips()) {
-        
-        shipsSunk += !_boards[PLAYERONE].checkAfloat(ship);
-        
-        if (shipsSunk == _boards[PLAYERONE].getShips().size()) {
-            _gameEnded = true;
-            return true;
-        }
-    
-    }
-    
-    shipsSunk = 0;
-    
-    for (auto ship = 0; ship < _boards[PLAYERTWO].getShips().size(); ship++) {
-        
-        shipsSunk += !_boards[PLAYERTWO].checkAfloat(_boards[PLAYERTWO].getShips()[ship]);
-        
-        if (shipsSunk == _boards[PLAYERTWO].getShips().size()) {
-            _gameEnded = true;
-            return true;
-        }
-        
-    }
-    
-    return false;
+    return _gameEnded;
     
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

@@ -41,6 +41,8 @@ public:
 	bool checkAfloat (const BFShip & shipToCheck) const;
 	const vector<BFShip> & getShips() const;
 	unsigned int countHits() const;
+    
+    bool playerHasLost() const;
 
 private:
 	coordinateSet getSpaces(const BFShip & ship) const;

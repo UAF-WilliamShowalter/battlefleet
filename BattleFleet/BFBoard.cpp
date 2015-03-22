@@ -170,3 +170,26 @@ unsigned int BFBoard::countHits() const{
 	}
 	return count;
 }
+
+bool BFBoard::playerHasLost() const {
+    
+    unsigned int shipsSunk = 0;
+    
+    for (auto ship : _board) {
+    
+        shipsSunk += !checkAfloat(ship);
+        
+        if (shipsSunk == _board.size()) {
+            
+            return true;
+            
+        }
+        
+    }
+    
+    return false;
+}
+
+
+
+

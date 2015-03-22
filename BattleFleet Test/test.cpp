@@ -12,6 +12,7 @@
 #include <utility>
 #include "BFShip.h"
 #include "BFBoard.h"
+#include "Game.h"
 #include "catch.hpp"
 
 TEST_CASE("Tests BattleFleet Game Components","BattleFleet")
@@ -201,4 +202,73 @@ TEST_CASE("Tests BattleFleet Game Components","BattleFleet")
 		REQUIRE(testBoard.placePin(7,4));
 		REQUIRE(testBoard.countHits() == 8);
 	}
+    
+    SECTION("Start a game for Player VS Player"){
+        Game newGame;
+        
+        // Should have two boards for two players
+        REQUIRE(newGame.numberOfPlayers() == 2);
+        
+        // Setting player one's ships.
+        REQUIRE(newGame.placePlayerShips(PLAYERONE, 0, 0, 2, NORTH));
+        REQUIRE(newGame.placePlayerShips(PLAYERONE, 1, 0, 3, NORTH));
+        
+        // Setting player two's ships.
+        REQUIRE(newGame.placePlayerShips(PLAYERTWO, 0, 0, 2, NORTH));
+        REQUIRE(newGame.placePlayerShips(PLAYERTWO, 1, 0, 3, NORTH));
+        
+        // It should be player one's turn.
+        // test 106
+        REQUIRE(newGame.playerTurn() == PLAYERONE);
+        
+        // Player two is trying to cheat by saying it's his turn.
+        REQUIRE(!(newGame.playerTurn() == PLAYERTWO));
+        
+        // Player one places a pin. The next turn should belong to player two.
+        REQUIRE(newGame.attackOpponent(PLAYERONE, 0, 0));
+        
+        // Player one wants to know if his turn is over and it is.
+        // test 109
+        REQUIRE(newGame.playerTurn() == PLAYERTWO);
+        
+        // Player one tries to place another pin anyway, but fails because it wasn't his turn.
+        REQUIRE(!newGame.attackOpponent(PLAYERONE, 0, 1));
+        
+        // Someone yells that the game is over, but it's not.
+        REQUIRE(!newGame.hasEnded());
+        
+        // Player two checks to see if it's his turn.
+        REQUIRE(newGame.playerTurn() == PLAYERTWO);
+        
+        // Player two places a pin now.
+        REQUIRE(newGame.attackOpponent(PLAYERTWO, 0, 0));
+        
+        // The audience wants to know who's turn it is now (should now be player one's turn).
+        REQUIRE(newGame.playerTurn() == PLAYERONE);
+        
+        // Player one attempt to attack the same spot again, turn does not end though.
+        REQUIRE(!newGame.attackOpponent(PLAYERONE, 0, 0));
+        REQUIRE(newGame.playerTurn() == PLAYERONE);
+        
+        // The game gets serious and the players play aggressively.
+        REQUIRE(newGame.attackOpponent(PLAYERONE, 0, 1));
+        REQUIRE(newGame.attackOpponent(PLAYERTWO, 0, 1));
+        
+        REQUIRE(newGame.attackOpponent(PLAYERONE, 1, 0));
+        REQUIRE(newGame.attackOpponent(PLAYERTWO, 5, 4));
+        
+        REQUIRE(newGame.attackOpponent(PLAYERONE, 1, 1));
+        REQUIRE(newGame.attackOpponent(PLAYERTWO, 4, 8));
+        
+        // Player one takes the win!
+        REQUIRE(newGame.attackOpponent(PLAYERONE, 1, 2));
+        
+        REQUIRE(newGame.hasEnded());
+        
+        // Both players attempt to attack each other even after game ends!
+        // If the game were to continue, it would be player one's turn. The _gameEnded flag was set to true.
+        REQUIRE(!newGame.attackOpponent(PLAYERTWO, 9, 9));
+        REQUIRE(!newGame.attackOpponent(PLAYERONE, 9, 9));
+        
+    }
 }
