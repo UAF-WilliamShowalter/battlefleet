@@ -15,7 +15,7 @@ Game::Game(){
     _boards.push_back(BFBoard());
     _boards.push_back(BFBoard());
     
-    _turn = false; // Player one starts the game always.
+    _turn = PLAYERONE; // Player one starts the game always.
     _gameEnded = false;
     
 }
@@ -37,7 +37,12 @@ bool Game::attackOpponent(Player player, unsigned int x, unsigned int y) {
     if ((player == _turn) && (_gameEnded == false)){
         
         if (_boards[!player].placePin(x, y)){
-            _turn = !player;
+			if (_turn == PLAYERONE){
+				_turn = PLAYERTWO;
+			}
+			else {
+				_turn = PLAYERONE;
+			}
             return true;
         }
         else
@@ -50,9 +55,9 @@ bool Game::attackOpponent(Player player, unsigned int x, unsigned int y) {
     
 }
 
-bool Game::playerTurn(Player player){
+Player Game::playerTurn(){
     
-    return (player == _turn);
+    return _turn;
     
 }
 
@@ -60,9 +65,9 @@ bool Game::hasEnded() {
     
     unsigned int shipsSunk = 0;
     
-    for (auto ship = 0; ship < _boards[PLAYERONE].getShips().size(); ship++) {
+	for (auto ship : _boards[PLAYERONE].getShips()) {
         
-        shipsSunk += !_boards[PLAYERONE].checkAfloat(_boards[PLAYERONE].getShips()[ship]);
+        shipsSunk += !_boards[PLAYERONE].checkAfloat(ship);
         
         if (shipsSunk == _boards[PLAYERONE].getShips().size()) {
             _gameEnded = true;

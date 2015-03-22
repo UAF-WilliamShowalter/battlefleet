@@ -43,7 +43,7 @@ public:
 	unsigned int countHits() const;
 
 private:
-	unordered_set<boardCoordinate,pair_hash> getSpaces(const BFShip & ship) const;
+	coordinateSet getSpaces(const BFShip & ship) const;
     vector<BFShip> _board;
 	vector<pin> _pins;
 };

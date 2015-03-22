@@ -17,9 +17,9 @@ BFShip::BFShip(unsigned int x, unsigned int y, unsigned int length, unsigned int
 
 }
 
-const std::pair<unsigned int, unsigned int> BFShip::getPosition() const{
+const boardCoordinate BFShip::getPosition() const{
 
-    return std::pair<unsigned int, unsigned int>(_xCoordinate, _yCoordinate);
+    return boardCoordinate (_xCoordinate, _yCoordinate);
     
 }
 

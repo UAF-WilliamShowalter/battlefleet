@@ -24,12 +24,12 @@ public:
     bool placePlayerShips(Player, unsigned int, unsigned int, unsigned int, Direction);
     bool attackOpponent(Player, unsigned int, unsigned int);
     
-    bool playerTurn(Player);
+    Player playerTurn();
     bool hasEnded();
     
 private:
     vector<BFBoard> _boards;
-    bool _turn;
+    Player _turn;
     bool _gameEnded;
     
 };

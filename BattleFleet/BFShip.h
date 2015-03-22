@@ -19,7 +19,7 @@ class BFShip {
 public:
 	
 	BFShip(unsigned int x, unsigned int y, unsigned int length, unsigned int Direction);
-	const std::pair<unsigned int,unsigned int> getPosition() const;
+	const boardCoordinate getPosition() const;
 	const unsigned int getLength() const;
 	const unsigned int getDirection() const;
 	
