@@ -23,9 +23,11 @@ public:
     unsigned long numberOfPlayers();
     bool placePlayerShips(Player, unsigned int, unsigned int, unsigned int, Direction);
     bool attackOpponent(Player, unsigned int, unsigned int);
-    
+	const vector<BFShip> & getPlayerShips(Player player) const;
+
     Player playerTurn();
     bool hasEnded();
+	void switchPlayer();
     
 private:
     vector<BFBoard> _boards;

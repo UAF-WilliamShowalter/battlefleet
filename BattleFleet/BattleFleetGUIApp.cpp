@@ -18,6 +18,11 @@ using std::vector;
 
 enum GameStatus { NOTINGAME, STARTINGGAME, SETUPGAME, INGAME };
 
+const int X_OFFSET = 505;
+const int Y_OFFSET = 105;
+const int BOARD_SIZE = 660;
+const int SQUARE_SIZE = BOARD_SIZE/BF_BOARD_SIZE;
+
 class BattleFleetGUIApp : public AppNative {
 public:
     
@@ -25,6 +30,8 @@ public:
     void mouseDown( MouseEvent event );
     void update();
     void draw();
+	void drawPlayerShips(Player);
+	void drawBackground();
     
 private:
     
@@ -116,23 +123,34 @@ void BattleFleetGUIApp::mouseDown( MouseEvent event ) {
         case SETUPGAME: {
 
             // you can place ships or pins by changing the name and the index.
-        
-            if ((event.getX() >= 505 ) && (event.getX() <= 1165) && (event.getY() >= 105) && (event.getY() <= 765)) {
-                
+			drawBackground();
+
+            if ((event.getX() >= X_OFFSET ) && (event.getX() <= X_OFFSET+BOARD_SIZE) &&
+				(event.getY() >= Y_OFFSET) && (event.getY() <= Y_OFFSET+BOARD_SIZE)) {
+
+				unsigned int x_coord = (event.getX()-X_OFFSET)/SQUARE_SIZE;
+				unsigned int y_coord = (event.getY()-Y_OFFSET)/SQUARE_SIZE;
+
+				_game.placePlayerShips(_game.playerTurn(), x_coord, y_coord, 1, NORTH);
+
                 console() << "player one set his ship up\n";
                 console() << event.getPos();
-                gl::draw( _shipImages[0], Rectf(event.getX() - 25, event.getY() - 25, event.getX() + 25, event.getY() + 25));
-                
-                
+
+				if (!(_game.getPlayerShips(_game.playerTurn()).size()<5))
+				{
+					if (_game.playerTurn() == PLAYERONE)
+					{
+						_game.switchPlayer();
+					}
+					else
+					{
+						_game.switchPlayer();
+						_inGameStatus = INGAME;
+					}
+				}
             }
-            
-            
-            
-            
-            
-            
-            
-            
+
+			drawPlayerShips(_game.playerTurn());
 
             break;
 
@@ -171,10 +189,7 @@ void BattleFleetGUIApp::draw() {
             // 660 by 660
             //
             // gl::drawSolidRect( Rectf( 505, 765, 1165, 105));
-            
-            
-            
-            
+
             //gl::setViewport( Area( 0, 800, 1600, 0));
             
             _inGameStatus = SETUPGAME;
@@ -183,10 +198,7 @@ void BattleFleetGUIApp::draw() {
         }
     
         case INGAME:{
-            
-            gl::clear();
-            gl::draw( _playerView[PLAYERONE].getTexture() );
-            
+
             break;
         }
         
@@ -195,6 +207,22 @@ void BattleFleetGUIApp::draw() {
     }
     
     
+}
+
+void BattleFleetGUIApp::drawPlayerShips(Player player)
+{
+	for (auto ship : _game.getPlayerShips(player))
+	{
+		boardCoordinate shipCoords = ship.getPosition();
+		gl::draw( _shipImages[0], Rectf(shipCoords.first*SQUARE_SIZE+X_OFFSET, shipCoords.second*SQUARE_SIZE+Y_OFFSET,
+										(shipCoords.first+1)*SQUARE_SIZE+X_OFFSET-5, (shipCoords.second+1)*SQUARE_SIZE+Y_OFFSET-5));
+
+	}
+}
+
+void BattleFleetGUIApp::drawBackground()
+{
+	gl::draw( _backGround, Area( 400, 0, 1200, 800) );// Centered board
 }
 
 CINDER_APP_NATIVE( BattleFleetGUIApp, RendererGl )

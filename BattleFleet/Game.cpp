@@ -37,12 +37,7 @@ bool Game::attackOpponent(Player player, unsigned int x, unsigned int y) {
     if ((player == _turn) && (_gameEnded == false)){
         
         if (_boards[!player].placePin(x, y)){
-			if (_turn == PLAYERONE){
-				_turn = PLAYERTWO;
-			}
-			else {
-				_turn = PLAYERONE;
-			}
+			switchPlayer();
             
             _gameEnded = (_boards[PLAYERONE].playerHasLost() || _boards[PLAYERTWO].playerHasLost());
             return true;
@@ -69,21 +64,16 @@ bool Game::hasEnded() {
     
 }
 
+const vector<BFShip> & Game::getPlayerShips(Player player) const
+{
+	return _boards[player].getShips();
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+void Game::switchPlayer() {
+	if (_turn == PLAYERONE){
+		_turn = PLAYERTWO;
+	}
+	else {
+		_turn = PLAYERONE;
+	}
+}
