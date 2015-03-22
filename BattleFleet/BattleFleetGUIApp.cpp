@@ -117,9 +117,10 @@ void BattleFleetGUIApp::mouseDown( MouseEvent event ) {
 
             // you can place ships or pins by changing the name and the index.
         
-            if ((event.getX() >= 505) && (event.getX() <= 1165) && (event.getY() >= 105) && (event.getY() <= 765)) {
+            if ((event.getX() >= 505 ) && (event.getX() <= 1165) && (event.getY() >= 105) && (event.getY() <= 765)) {
                 
                 console() << "player one set his ship up\n";
+                console() << event.getPos();
                 gl::draw( _shipImages[0], Rectf(event.getX() - 25, event.getY() - 25, event.getX() + 25, event.getY() + 25));
                 
                 
