@@ -16,7 +16,7 @@ using namespace ci::app;
 
 using std::vector;
 
-enum GameStatus { NOTINGAME, STARTINGGAME, SETUPGAME, INGAME };
+enum GameStatus { MENU, SETUPGAME, PLAYERSWITCHSETUP, INGAME, INGAMESWITCH };
 
 const int X_OFFSET = 105;
 const int Y_OFFSET = 105;
@@ -43,6 +43,7 @@ private:
     
     gl::Texture _titleIcon;
     gl::Texture _startIcon;
+    gl::Texture _switchPlayerIcon;
     
     vector<gl::Fbo> _playerView;
     
@@ -56,11 +57,8 @@ private:
 void BattleFleetGUIApp::setup() {
     
     setWindowSize(1600, 800);
-    
-    _playerView.push_back(gl::Fbo(1600, 800));
-    _playerView.push_back(gl::Fbo(1600, 800));
-    
-    _inGameStatus = NOTINGAME;
+
+    _inGameStatus = MENU;
       
     TextLayout title;
     title.setFont( Font("Arial", 36 ) );
@@ -73,6 +71,13 @@ void BattleFleetGUIApp::setup() {
     start.setColor(Color( 1, 1, .1f ));
     start.addLine( " -New Game- ");
     _startIcon = gl::Texture( start.render( true, false ) );
+    
+    TextLayout switchPlayer;
+    switchPlayer.setFont( Font("Arial", 25 ) );
+    switchPlayer.setColor(Color( 1, 1, .1f ));
+    switchPlayer.addLine( " Hand computer to the other player ");
+    switchPlayer.addCenteredLine( " Click to continue ");
+    _switchPlayerIcon = gl::Texture( switchPlayer.render( true, false ) );
     
     _backGround = gl::Texture( loadImage( loadResource( "BattleFleetBoard.jpg" ) ) );
     
@@ -95,7 +100,7 @@ void BattleFleetGUIApp::mouseDown( MouseEvent event ) {
     
     switch (_inGameStatus){
             
-        case NOTINGAME:{
+        case MENU:{
             
             if ((event.getX() >= 600) && (event.getX() <= 1000) && (event.getY() >= 125) && (event.getY() <= 225)) {
                 
@@ -105,7 +110,7 @@ void BattleFleetGUIApp::mouseDown( MouseEvent event ) {
             
             else if ((event.getX() >= 675) && (event.getX() <= 925) && (event.getY() >= 300) && (event.getY() <= 400)) {
                 
-                _inGameStatus = STARTINGGAME;
+                _inGameStatus = SETUPGAME;
                 
                 
             }
@@ -123,9 +128,6 @@ void BattleFleetGUIApp::mouseDown( MouseEvent event ) {
 
         case SETUPGAME: {
 
-            // you can place ships or pins by changing the name and the index.
-			drawBackground();
-
             if ((event.getX() >= X_OFFSET) && (event.getX() <= X_OFFSET+BOARD_SIZE) &&
 				(event.getY() >= Y_OFFSET) && (event.getY() <= Y_OFFSET+BOARD_SIZE)) {
 
@@ -142,19 +144,33 @@ void BattleFleetGUIApp::mouseDown( MouseEvent event ) {
 					if (_game.playerTurn() == PLAYERONE)
 					{
 						_game.switchPlayer();
+                        _inGameStatus = PLAYERSWITCHSETUP;
 					}
 					else
 					{
 						_game.switchPlayer();
-						_inGameStatus = INGAME;
+						_inGameStatus = INGAMESWITCH;
 					}
 				}
             }
 
-			drawActivePlayerShips();
-
             break;
 
+        }
+            
+        case PLAYERSWITCHSETUP: {
+            
+            _inGameStatus = SETUPGAME;
+            
+            break;
+            
+        }
+            
+        case INGAMESWITCH: {
+            
+            _inGameStatus = INGAME;
+            
+            break;
         }
             
             
@@ -171,7 +187,7 @@ void BattleFleetGUIApp::update() {
 void BattleFleetGUIApp::draw() {
     
     switch (_inGameStatus) {
-        case NOTINGAME: {
+        case MENU: {
             
             gl::draw( _backGround, getWindowBounds() );
             gl::draw( _titleIcon, Area( 600, 225, 1000, 125 ) );
@@ -179,31 +195,33 @@ void BattleFleetGUIApp::draw() {
             break;
             
         }
-        case STARTINGGAME: {
+            
+        case SETUPGAME: {
             
             gl::clear();
+            drawBackground();
+            drawActivePlayerShips();
             
-            // x1, y1, x2, y2
-
-			drawBackground();
-            
-            // 660 by 660
-            //
-            // gl::drawSolidRect( Rectf( 505, 765, 1165, 105));
-
-            //gl::setViewport( Area( 0, 800, 1600, 0));
-            
-            _inGameStatus = SETUPGAME;
             break;
             
         }
     
-        case INGAME:{
-
+        case PLAYERSWITCHSETUP: {
+            
+            gl::clear();
+            gl::draw( _switchPlayerIcon, Area( 400, 200, 1200, 600 ));
+            
             break;
+            
         }
         
-        
+        case INGAMESWITCH: {
+            
+            gl::clear();
+            gl::draw( _switchPlayerIcon, Area( 400, 200, 1200, 600 ));
+            
+            break;
+        }
             
     }
     
