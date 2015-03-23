@@ -16,8 +16,6 @@ Game::Game(){
     _boards.push_back(BFBoard());
     
     _activePlayer = PLAYERONE; // Player one starts the game.
-    _gameEnded = false;
-    
 }
 
 unsigned long Game::numberOfPlayers() const{
@@ -34,11 +32,10 @@ bool Game::placePlayerShips(Player player, unsigned int x, unsigned int y, unsig
 
 bool Game::attackOpponent(Player player, unsigned int x, unsigned int y) {
     
-    if ((player == _activePlayer) && (_gameEnded == false)){
+    if ((player == _activePlayer) && (!hasEnded())){
         
         if (_boards[getInactivePlayer()].placePin(x, y)){
             
-            _gameEnded = (_boards[PLAYERONE].playerHasLost() || _boards[PLAYERTWO].playerHasLost());
             return true;
             
         }
@@ -70,8 +67,8 @@ Player Game::getInactivePlayer() const {
 
 bool Game::hasEnded() const {
     
-    return _gameEnded;
-    
+	return	(_boards[PLAYERONE].playerHasLost() || _boards[PLAYERTWO].playerHasLost());
+
 }
 
 const vector<BFShip> & Game::getPlayerShips(Player player) const

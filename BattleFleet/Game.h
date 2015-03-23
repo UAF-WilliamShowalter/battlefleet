@@ -35,9 +35,7 @@ public:
     
 private:
     vector<BFBoard> _boards;
-    Player _activePlayer;
-    bool _gameEnded;
-    
+    Player _activePlayer;  
 };
 
 #endif /* defined(__BattleFleet__Game__) */
