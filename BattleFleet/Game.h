@@ -29,7 +29,7 @@ public:
     const vector<pin> getPlayerHitPins(Player player) const;
     
     Player getInactivePlayer() const;
-    Player playerTurn() const;
+    Player getActivePlayer() const;
     bool hasEnded() const;
 	bool switchPlayer();
     

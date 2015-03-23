@@ -206,51 +206,59 @@ TEST_CASE("Tests BattleFleet Game Components","BattleFleet")
     SECTION("Start a game for Player VS Player"){
         Game newGame;
         
+        vector<BFShip> playerOneTestShips;
+        vector<BFShip> playerTwoTestShips;
+        
         // Should have two boards for two players
         REQUIRE(newGame.numberOfPlayers() == 2);
         
         // Setting player one's ships.
         REQUIRE(newGame.placePlayerShips(PLAYERONE, 0, 0, 2, NORTH));
+        playerOneTestShips.push_back(BFShip(0,0,2,NORTH));
         REQUIRE(newGame.placePlayerShips(PLAYERONE, 1, 0, 3, NORTH));
+        playerOneTestShips.push_back(BFShip(1,0,3,NORTH));
+        REQUIRE(newGame.getPlayerShips(PLAYERONE) == playerOneTestShips);
         
         // Setting player two's ships.
         REQUIRE(newGame.placePlayerShips(PLAYERTWO, 0, 0, 2, NORTH));
+        playerTwoTestShips.push_back(BFShip(0,0,2,NORTH));
         REQUIRE(newGame.placePlayerShips(PLAYERTWO, 1, 0, 3, NORTH));
+        playerTwoTestShips.push_back(BFShip(1,0,3,NORTH));
+        REQUIRE(newGame.getPlayerShips(PLAYERTWO) == playerTwoTestShips);
         
-        // It should be player one's turn.
-        // test 106
-        REQUIRE(newGame.playerTurn() == PLAYERONE);
+        REQUIRE(newGame.getActivePlayer() == PLAYERONE);
+        REQUIRE(newGame.getInactivePlayer() == PLAYERTWO);
         
-        // Player two is trying to cheat by saying it's his turn.
-        REQUIRE(!(newGame.playerTurn() == PLAYERTWO));
+        REQUIRE(!(newGame.getActivePlayer() == PLAYERTWO));
+        REQUIRE(newGame.getInactivePlayer() == PLAYERTWO);
         
         // Player one places a pin. The next turn should belong to player two.
         REQUIRE((newGame.attackOpponent(PLAYERONE, 0, 0) && newGame.switchPlayer()));
         
         // Player one wants to know if his turn is over and it is.
-        // test 109
-        REQUIRE(newGame.playerTurn() == PLAYERTWO);
+    
+        REQUIRE(newGame.getActivePlayer() == PLAYERTWO);
+        REQUIRE(newGame.getInactivePlayer() == PLAYERONE);
         
         // Player one tries to place another pin anyway, but fails because it wasn't his turn.
         REQUIRE(!(newGame.attackOpponent(PLAYERONE, 0, 1) && newGame.switchPlayer()));
+        REQUIRE(newGame.getInactivePlayer() == PLAYERONE);
         
-        // Someone yells that the game is over, but it's not.
         REQUIRE(!newGame.hasEnded());
         
-        // Player two checks to see if it's his turn.
-        REQUIRE(newGame.playerTurn() == PLAYERTWO);
+        REQUIRE(newGame.getActivePlayer() == PLAYERTWO);
+        REQUIRE(newGame.getInactivePlayer() == PLAYERONE);
         
         // Player two places a pin now.
         REQUIRE((newGame.attackOpponent(PLAYERTWO, 0, 0) && newGame.switchPlayer()));
         
-        // The audience wants to know who's turn it is now (should now be player one's turn).
-        REQUIRE(newGame.playerTurn() == PLAYERONE);
+        REQUIRE(newGame.getActivePlayer() == PLAYERONE);
         
-        // Player one attempt to attack the same spot again, turn does not end though.
+        // Player one attempts to attack the same spot again, turn does not end though.
         REQUIRE(!newGame.attackOpponent(PLAYERONE, 0, 0));
-        REQUIRE(newGame.playerTurn() == PLAYERONE);
+        REQUIRE(newGame.getActivePlayer() == PLAYERONE);
+        REQUIRE(newGame.getInactivePlayer() == PLAYERTWO);
         
-        // The game gets serious and the players play aggressively.
         REQUIRE((newGame.attackOpponent(PLAYERONE, 0, 1) && newGame.switchPlayer()));
         REQUIRE((newGame.attackOpponent(PLAYERTWO, 0, 1) && newGame.switchPlayer()));
         
@@ -265,8 +273,7 @@ TEST_CASE("Tests BattleFleet Game Components","BattleFleet")
         
         REQUIRE(newGame.hasEnded());
         
-        // Both players attempt to attack each other even after game ends!
-        // If the game were to continue, it would be player one's turn. The _gameEnded flag was set to true.
+        // Players shouldn't be able to attack after game ends.
         REQUIRE(!(newGame.attackOpponent(PLAYERTWO, 9, 9) && newGame.switchPlayer()));
         REQUIRE(!(newGame.attackOpponent(PLAYERONE, 9, 9) && newGame.switchPlayer()));
         

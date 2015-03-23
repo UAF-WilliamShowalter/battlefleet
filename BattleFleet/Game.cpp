@@ -15,7 +15,7 @@ Game::Game(){
     _boards.push_back(BFBoard());
     _boards.push_back(BFBoard());
     
-    _turn = PLAYERONE; // Player one starts the game always.
+    _turn = PLAYERONE; // Player one starts the game.
     _gameEnded = false;
     
 }
@@ -52,7 +52,7 @@ bool Game::attackOpponent(Player player, unsigned int x, unsigned int y) {
     
 }
 
-Player Game::playerTurn() const{
+Player Game::getActivePlayer() const{
     
     return _turn;
     

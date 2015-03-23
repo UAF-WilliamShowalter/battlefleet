@@ -4,7 +4,6 @@
 #include "cinder/gl/Texture.h"
 #include "cinder/Font.h"
 #include "cinder/Text.h"
-#include "cinder/gl/Fbo.h" // Frame Buffer Objects
 
 #include "BFBoard.h"
 #include "BFShip.h"
@@ -25,7 +24,7 @@ const int SCREEN_SIZE_Y = 800;
 const int BOARD_SIZE = 660;
 const int SQUARE_SIZE = BOARD_SIZE/BF_BOARD_SIZE;
 const int BETWEEN_BOARDS = SCREEN_SIZE_X/2;
-const int MAX_SHIPS = 8;
+const int MAX_SHIPS = 17;
 
 class BattleFleetGUIApp : public AppNative {
 public:
@@ -37,7 +36,6 @@ public:
     void drawPlayerPins(Player player);
 	void drawPlayerShips(Player player);
 	void drawBackground();
-
 
 private:
 	void drawTextureAtCoordinate(const vector<boardCoordinate> & coordinates, const gl::Texture & texture, unsigned int screenOffset) const;
@@ -53,8 +51,6 @@ private:
     gl::Texture _titleIcon;
     gl::Texture _startIcon;
     gl::Texture _switchPlayerIcon;
-    
-    vector<gl::Fbo> _playerView;
     
     vector<gl::Texture> _playerBoard;
     vector<gl::Texture> _shipImages;
@@ -111,22 +107,10 @@ void BattleFleetGUIApp::mouseDown( MouseEvent event ) {
             
         case MENU:{
             
-            if ((event.getX() >= 600) && (event.getX() <= 1000) && (event.getY() >= 125) && (event.getY() <= 225)) {
-                
-                console() << "This is the title.\n";
-                
-            }
-            
-            else if ((event.getX() >= 675) && (event.getX() <= 925) && (event.getY() >= 300) && (event.getY() <= 400)) {
+            if ((event.getX() >= 675) && (event.getX() <= 925) && (event.getY() >= 300) && (event.getY() <= 400)) {
                 
                 _inGameStatus = SETUPGAME;
                 
-                
-            }
-            
-            else {
-                
-                console() << "out of bounds\n";
                 
             }
             
@@ -143,14 +127,11 @@ void BattleFleetGUIApp::mouseDown( MouseEvent event ) {
 				unsigned int x_coord = (event.getX()-X_OFFSET)/SQUARE_SIZE;
 				unsigned int y_coord = (event.getY()-Y_OFFSET)/SQUARE_SIZE;
 
-				_game.placePlayerShips(_game.playerTurn(), x_coord, y_coord, 1, NORTH);
+				_game.placePlayerShips(_game.getActivePlayer(), x_coord, y_coord, 1, NORTH);
 
-                console() << "player one set his ship up\n";
-                console() << event.getPos();
-
-				if (!(_game.getPlayerShips(_game.playerTurn()).size() < MAX_SHIPS))
+				if (!(_game.getPlayerShips(_game.getActivePlayer()).size() < MAX_SHIPS))
 				{
-					if (_game.playerTurn() == PLAYERONE)
+					if (_game.getActivePlayer() == PLAYERONE)
 					{
 						_game.switchPlayer();
                         _inGameStatus = PLAYERSWITCHSETUP;
@@ -190,7 +171,7 @@ void BattleFleetGUIApp::mouseDown( MouseEvent event ) {
                 unsigned int x_coord = (event.getX()-X_OFFSET)/SQUARE_SIZE;
                 unsigned int y_coord = (event.getY()-Y_OFFSET)/SQUARE_SIZE;
                 
-                if (_game.attackOpponent(_game.playerTurn(), x_coord, y_coord))
+                if (_game.attackOpponent(_game.getActivePlayer(), x_coord, y_coord))
                     _inGameStatus = INGAMESHOWPIN;
                 
             }
@@ -216,9 +197,6 @@ void BattleFleetGUIApp::mouseDown( MouseEvent event ) {
 }
 
 void BattleFleetGUIApp::update() {
-    
-    // Probably used to check when get is over/turn and/or other checkable functions.
-    
 }
 
 void BattleFleetGUIApp::draw() {
@@ -237,7 +215,7 @@ void BattleFleetGUIApp::draw() {
             
             gl::clear();
             drawBackground();
-            drawPlayerShips(_game.playerTurn());
+            drawPlayerShips(_game.getActivePlayer());
             
             break;
             
@@ -264,8 +242,8 @@ void BattleFleetGUIApp::draw() {
             
             gl::clear();
             drawBackground();
-            drawPlayerShips(_game.playerTurn());
-            drawPlayerPins(_game.playerTurn());
+            drawPlayerShips(_game.getActivePlayer());
+            drawPlayerPins(_game.getActivePlayer());
             drawPlayerPins(_game.getInactivePlayer());
             
             break;
@@ -275,8 +253,8 @@ void BattleFleetGUIApp::draw() {
             
             gl::clear();
             drawBackground();
-            drawPlayerShips(_game.playerTurn());
-            drawPlayerPins(_game.playerTurn());
+            drawPlayerShips(_game.getActivePlayer());
+            drawPlayerPins(_game.getActivePlayer());
             drawPlayerPins(_game.getInactivePlayer());
             
             break;
@@ -346,7 +324,7 @@ void BattleFleetGUIApp::drawTextureAtCoordinate(const vector<boardCoordinate> & 
 unsigned int BattleFleetGUIApp::calculateScreenOffset(Player player){
 	unsigned int screenOffset = 0;
 
-	if (player == _game.playerTurn()){
+	if (player == _game.getActivePlayer()){
 
 		screenOffset = BETWEEN_BOARDS;
 
