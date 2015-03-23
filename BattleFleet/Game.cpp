@@ -15,7 +15,7 @@ Game::Game(){
     _boards.push_back(BFBoard());
     _boards.push_back(BFBoard());
     
-    _turn = PLAYERONE; // Player one starts the game.
+    _activePlayer = PLAYERONE; // Player one starts the game.
     _gameEnded = false;
     
 }
@@ -34,7 +34,7 @@ bool Game::placePlayerShips(Player player, unsigned int x, unsigned int y, unsig
 
 bool Game::attackOpponent(Player player, unsigned int x, unsigned int y) {
     
-    if ((player == _turn) && (_gameEnded == false)){
+    if ((player == _activePlayer) && (_gameEnded == false)){
         
         if (_boards[getInactivePlayer()].placePin(x, y)){
             
@@ -54,13 +54,13 @@ bool Game::attackOpponent(Player player, unsigned int x, unsigned int y) {
 
 Player Game::getActivePlayer() const{
     
-    return _turn;
+    return _activePlayer;
     
 }
 
 Player Game::getInactivePlayer() const {
     
-    if (_turn == PLAYERONE)
+    if (_activePlayer == PLAYERONE)
         return PLAYERTWO;
     
     else
@@ -80,11 +80,11 @@ const vector<BFShip> & Game::getPlayerShips(Player player) const
 }
 
 bool Game::switchPlayer() {
-	if (_turn == PLAYERONE){
-		_turn = PLAYERTWO;
+	if (_activePlayer == PLAYERONE){
+		_activePlayer = PLAYERTWO;
 	}
 	else {
-		_turn = PLAYERONE;
+		_activePlayer = PLAYERONE;
 	}
 
 	// Returning true allows for the use of statements like:
