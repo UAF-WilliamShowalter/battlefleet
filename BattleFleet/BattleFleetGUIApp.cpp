@@ -42,6 +42,7 @@ public:
 private:
 	void drawTextureAtCoordinate(const vector<boardCoordinate> & coordinates, const gl::Texture & texture, unsigned int screenOffset) const;
 	unsigned int calculateScreenOffset(Player player);
+	bool clickInsideBoard(const MouseEvent & event);
 
 private:
     
@@ -137,16 +138,12 @@ void BattleFleetGUIApp::mouseDown( MouseEvent event ) {
 
         case SETUPGAME: {
 
-            if ((event.getX() >= X_OFFSET) && (event.getX() <= X_OFFSET+BOARD_SIZE) &&
-				(event.getY() >= Y_OFFSET) && (event.getY() <= Y_OFFSET+BOARD_SIZE)) {
+            if (clickInsideBoard(event)) {
 
 				unsigned int x_coord = (event.getX()-X_OFFSET)/SQUARE_SIZE;
 				unsigned int y_coord = (event.getY()-Y_OFFSET)/SQUARE_SIZE;
 
 				_game.placePlayerShips(_game.playerTurn(), x_coord, y_coord, 1, NORTH);
-
-                console() << "player one set his ship up\n";
-                console() << event.getPos();
 
 				if (!(_game.getPlayerShips(_game.playerTurn()).size() < MAX_SHIPS))
 				{
@@ -184,8 +181,7 @@ void BattleFleetGUIApp::mouseDown( MouseEvent event ) {
             
         case INGAME: {
             
-            if ((event.getX() >= X_OFFSET) && (event.getX() <= X_OFFSET+BOARD_SIZE) &&
-                (event.getY() >= Y_OFFSET) && (event.getY() <= Y_OFFSET+BOARD_SIZE)) {
+            if (clickInsideBoard(event)) {
                 
                 unsigned int x_coord = (event.getX()-X_OFFSET)/SQUARE_SIZE;
                 unsigned int y_coord = (event.getY()-Y_OFFSET)/SQUARE_SIZE;
@@ -362,6 +358,11 @@ unsigned int BattleFleetGUIApp::calculateScreenOffset(Player player){
 	}
 
 	return screenOffset;
+}
+
+bool BattleFleetGUIApp::clickInsideBoard(const MouseEvent & event){
+	return ((event.getX() >= X_OFFSET) && (event.getX() <= X_OFFSET+BOARD_SIZE) &&
+			(event.getY() >= Y_OFFSET) && (event.getY() <= Y_OFFSET+BOARD_SIZE));
 }
 
 CINDER_APP_NATIVE( BattleFleetGUIApp, RendererGl )
