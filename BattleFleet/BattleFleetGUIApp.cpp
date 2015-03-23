@@ -129,7 +129,7 @@ void BattleFleetGUIApp::mouseDown( MouseEvent event ) {
 
 				_game.placePlayerShips(_game.getActivePlayer(), x_coord, y_coord, 1, NORTH);
 
-				if (!(_game.getPlayerShips(_game.playerTurn()).size() < MAX_SHIPS))
+				if (!(_game.getPlayerShips(_game.getActivePlayer()).size() < MAX_SHIPS))
 				{
 					if (_game.getActivePlayer() == PLAYERONE)
 					{
