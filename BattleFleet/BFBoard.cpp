@@ -10,16 +10,10 @@
 
 bool BFBoard::placeShip(unsigned int x, unsigned int y, unsigned int length, Direction direction){
 
-	pair<int,int> modifiers = getDirectionModifier(direction);
-	int xModifier = modifiers.first, yModifier = modifiers.second;
-
-	if ( ((y + yModifier*(length - 1)) >= BF_BOARD_SIZE) ||
-		 ((x + xModifier*(length - 1)) >= BF_BOARD_SIZE) ) {
-
-            return false;
-	}
-
 	BFShip newShip (x,y,length,direction);
+
+	if (checkOffBoard(newShip))
+		return false;
 
 	if (checkCollisionFree(newShip)){
 		_board.push_back(BFShip(x,y,length,direction));
@@ -193,5 +187,17 @@ pair<int,int> BFBoard::getDirectionModifier(Direction direction) const{
 		xModifier = -1;
 
 	return pair<int,int>(xModifier,yModifier);
+}
+
+bool BFBoard::checkOffBoard(const BFShip & ship) const
+{
+	pair<int,int> modifiers = getDirectionModifier(ship.getDirection());
+	int xModifier = modifiers.first, yModifier = modifiers.second;
+
+	unsigned int x = ship.getPosition().first;
+	unsigned int y = ship.getPosition().second;
+
+	return  ((y + yModifier*(ship.getLength() - 1)) >= BF_BOARD_SIZE) ||
+			((x + xModifier*(ship.getLength() - 1)) >= BF_BOARD_SIZE);
 }
 

@@ -51,6 +51,8 @@ public: // Could be made private if testing program is refactored to get code co
 private:
 	bool checkCollisionFree (const BFShip & newShip) const;
 	pair<int,int> getDirectionModifier(Direction direction) const;
+	bool checkOffBoard(const BFShip & ship) const;
+
 
 private:
 	coordinateSet getSpaces(const BFShip & ship) const;
