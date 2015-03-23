@@ -33,11 +33,11 @@ public:
     void mouseDown( MouseEvent event );
     void update();
     void draw();
-    void drawPlayerPins(Player player);
-	void drawPlayerShips(Player player);
-	void drawBackground();
 
 private:
+	void drawPlayerPins(Player player);
+	void drawPlayerShips(Player player);
+	void drawBackground();
 	void drawTextureAtCoordinate(const vector<boardCoordinate> & coordinates, const gl::Texture & texture, unsigned int screenOffset) const;
 	unsigned int calculateScreenOffset(Player player);
 	bool clickInsideBoard(const MouseEvent & event);
@@ -46,14 +46,13 @@ private:
     
     Game _game;
     
-    int _inGameStatus;
+    GameStatus _inGameStatus;
     gl::Texture _backGround;
     
     gl::Texture _titleIcon;
     gl::Texture _startIcon;
     gl::Texture _switchPlayerIcon;
     
-    vector<gl::Texture> _playerBoard;
     vector<gl::Texture> _shipImages;
     vector<gl::Texture> _pinType;
     
@@ -191,7 +190,10 @@ void BattleFleetGUIApp::mouseDown( MouseEvent event ) {
             
             break;
         }
-            
+
+		default: {
+			break;
+		}
     }
 }
 
