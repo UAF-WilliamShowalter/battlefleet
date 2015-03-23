@@ -51,4 +51,24 @@ Finished userstories:
 
 Implementaiton of the statistics one only returns total number of hits vs misses. It would be trivial to implement a getter function to return the number of placed pins, which can then be used to complete the statistics.
 
-These all form the basic set of programming logic that goes into the game. The GUI is being worked on by Jake, who should hopefully be pushing changes soon. Menu and game classes need to be created to drive playing, and they'll tie heavily into the GUI. 
+These all form the basic set of programming logic that goes into the game. The GUI is being worked on by Jake, who should hopefully be pushing changes soon. Menu and game classes need to be created to drive playing, and they'll tie heavily into the GUI.
+
+Total time: 2.5 hr
+-------------
+
+-------------
+Saturday 3/21
+Worked for 5 hours independently before Jake and I could do a Google Hangout. Primarily worked to get our existing project to build for Cinder - Jake had made a Cinder XCode project separately using a tool that generated a project for him based on the location of the cinder and boost libraries on his system, and it was not compatible with any other computer. Changes merged into this project are universal for XCode clients.
+
+Worked from about 5pm until midnight with Jake over Google Hangout, taking turns on paired programming through screen sharing. Implemented GUI and remaining userstory code. Only unfinished part was we did not get the GUI setup to include creating ships with a size greater than one. To compensate we set the number of ships constant to 8, rather than the standard battleship value.
+
+Total time: 12 hours
+-------------
+
+-------------
+Sunday Mar 22
+
+Worked on refactoring code from Saturday and previous sessions.
+
+Total time: 2 hours
+-------------
