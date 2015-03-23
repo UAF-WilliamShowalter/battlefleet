@@ -20,7 +20,7 @@ Game::Game(){
     
 }
 
-unsigned long Game::numberOfPlayers() {
+unsigned long Game::numberOfPlayers() const{
     
     return _boards.size();
     
@@ -68,7 +68,7 @@ Player Game::getInactivePlayer() const {
     
 }
 
-bool Game::hasEnded() {
+bool Game::hasEnded() const {
     
     return _gameEnded;
     

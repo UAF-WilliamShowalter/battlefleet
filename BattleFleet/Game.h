@@ -20,9 +20,9 @@ class Game {
 public:
     
     Game();
-    unsigned long numberOfPlayers();
-    bool placePlayerShips(Player, unsigned int, unsigned int, unsigned int, Direction);
-    bool attackOpponent(Player, unsigned int, unsigned int);
+    unsigned long numberOfPlayers() const;
+	bool placePlayerShips(Player player, unsigned int x, unsigned int y, unsigned int length, Direction direction);
+	bool attackOpponent(Player player, unsigned int x, unsigned int y);
 	const vector<BFShip> & getPlayerShips(Player player) const;
     
     const vector<pin> getPlayerMissPins(Player player) const;
@@ -30,7 +30,7 @@ public:
     
     Player getInactivePlayer() const;
     Player playerTurn() const;
-    bool hasEnded();
+    bool hasEnded() const;
 	bool switchPlayer();
     
 private:

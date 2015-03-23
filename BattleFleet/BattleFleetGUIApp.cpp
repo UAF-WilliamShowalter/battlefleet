@@ -20,9 +20,11 @@ enum GameStatus { MENU, SETUPGAME, PLAYERSWITCHSETUP, INGAME, INGAMESWITCH, INGA
 
 const int X_OFFSET = 105;
 const int Y_OFFSET = 105;
+const int SCREEN_SIZE_X = 1600;
+const int SCREEN_SIZE_Y = 800;
 const int BOARD_SIZE = 660;
 const int SQUARE_SIZE = BOARD_SIZE/BF_BOARD_SIZE;
-const int BETWEEN_BOARDS = 800;
+const int BETWEEN_BOARDS = SCREEN_SIZE_X/2;
 const int MAX_SHIPS = 8;
 
 class BattleFleetGUIApp : public AppNative {
@@ -35,7 +37,12 @@ public:
     void drawPlayerPins(Player player);
 	void drawPlayerShips(Player player);
 	void drawBackground();
-    
+
+
+private:
+	void drawTextureAtCoordinate(const vector<boardCoordinate> & coordinates, const gl::Texture & texture, unsigned int screenOffset) const;
+	unsigned int calculateScreenOffset(Player player);
+
 private:
     
     Game _game;
@@ -297,70 +304,66 @@ void BattleFleetGUIApp::draw() {
 
 void BattleFleetGUIApp::drawPlayerShips(Player player)
 {
-    
-    unsigned int screenOffset = BETWEEN_BOARDS;
-    
-    if ((player == PLAYERONE) && (_game.hasEnded()))
-        screenOffset = 0;
-        
 
-    
+	unsigned int screenOffset = calculateScreenOffset(player);
+
+	vector<boardCoordinate> coordinates;
 	for (auto ship : _game.getPlayerShips(player))
 	{
-		boardCoordinate shipCoords = ship.getPosition();
-		gl::draw( _shipImages[0], Rectf(shipCoords.first*SQUARE_SIZE+X_OFFSET+ screenOffset,
-										shipCoords.second*SQUARE_SIZE+Y_OFFSET,
-										(shipCoords.first+1)*SQUARE_SIZE+X_OFFSET-5+ screenOffset,
-										(shipCoords.second+1)*SQUARE_SIZE+Y_OFFSET-5));
-
+		coordinates.push_back(ship.getPosition());
 	}
+
+	drawTextureAtCoordinate(coordinates, _shipImages[0], screenOffset);
 }
 
 void BattleFleetGUIApp::drawBackground()
 {
-	gl::draw( _backGround, Area( 0, 0, 800, 800) );// Player 1 board
-	gl::draw( _backGround, Area( 800, 0, 1600, 800) );// Player 2 board
+	gl::draw( _backGround, Area( 0, 0, BETWEEN_BOARDS, SCREEN_SIZE_Y) );			// Left board
+	gl::draw( _backGround, Area( BETWEEN_BOARDS, 0, SCREEN_SIZE_X, SCREEN_SIZE_Y) );// Right board
 }
 
 void BattleFleetGUIApp::drawPlayerPins(Player player) {
     
-    unsigned int screenOffset = 0;
+	unsigned int screenOffset = calculateScreenOffset(player);
+
+	drawTextureAtCoordinate(_game.getPlayerMissPins(player),_pinType[0], screenOffset);
+
+	drawTextureAtCoordinate(_game.getPlayerHitPins(player),_pinType[1], screenOffset);
     
-    if (player == _game.playerTurn()){
-    
-        screenOffset = BETWEEN_BOARDS;
-        
-    }
-    
-    if (_game.hasEnded()){
-        
-        if (player == PLAYERONE)
-            screenOffset = 0;
-        else
-            screenOffset = BETWEEN_BOARDS;
-    
-    }
-    
-    for (auto pin : _game.getPlayerMissPins(player) )
-    {
-        
-        gl::draw( _pinType[0], Rectf(pin.first*SQUARE_SIZE+X_OFFSET + screenOffset,
-                                        pin.second*SQUARE_SIZE+Y_OFFSET,
-                                        (pin.first+1)*SQUARE_SIZE+X_OFFSET-5 + screenOffset,
-                                        (pin.second+1)*SQUARE_SIZE+Y_OFFSET-5));
-        
-    }
-    
-    for (auto pin : _game.getPlayerHitPins(player) )
-    {
-        
-        gl::draw( _pinType[1], Rectf(pin.first*SQUARE_SIZE+X_OFFSET + screenOffset,
-                                     pin.second*SQUARE_SIZE+Y_OFFSET,
-                                     (pin.first+1)*SQUARE_SIZE+X_OFFSET-5 + screenOffset,
-                                     (pin.second+1)*SQUARE_SIZE+Y_OFFSET-5));
-        
-    }
-    
+}
+
+void BattleFleetGUIApp::drawTextureAtCoordinate(const vector<boardCoordinate> & coordinates, const gl::Texture & texture, unsigned int screenOffset) const
+{
+	for (auto coordinate : coordinates )
+	{
+
+		gl::draw( texture, Rectf(coordinate.first*SQUARE_SIZE+X_OFFSET + screenOffset,
+									 coordinate.second*SQUARE_SIZE+Y_OFFSET,
+									 (coordinate.first+1)*SQUARE_SIZE+X_OFFSET-5 + screenOffset,
+									 (coordinate.second+1)*SQUARE_SIZE+Y_OFFSET-5));
+
+	}
+}
+
+unsigned int BattleFleetGUIApp::calculateScreenOffset(Player player){
+	unsigned int screenOffset = 0;
+
+	if (player == _game.playerTurn()){
+
+		screenOffset = BETWEEN_BOARDS;
+
+	}
+
+	if (_game.hasEnded()){
+
+		if (player == PLAYERONE)
+			screenOffset = 0;
+		else
+			screenOffset = BETWEEN_BOARDS;
+
+	}
+
+	return screenOffset;
 }
 
 CINDER_APP_NATIVE( BattleFleetGUIApp, RendererGl )
