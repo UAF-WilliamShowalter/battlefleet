@@ -9,12 +9,6 @@
 #include "BFBoard.h"
 
 bool BFBoard::placeShip(unsigned int x, unsigned int y, unsigned int length, Direction direction){
-    
-    if (x >= BF_BOARD_SIZE || y >= BF_BOARD_SIZE) {
-        
-        return false;
-        
-    }
 
 	pair<int,int> modifiers = getDirectionModifier(direction);
 	int xModifier = modifiers.first, yModifier = modifiers.second;
