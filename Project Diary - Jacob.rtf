@@ -7,26 +7,46 @@
 
 \f0\fs22 \cf0 \CocoaLigature0 GITHUB URL: https://github.com/williamshowalter/battlefleet\
 \
+Monday 3/2/15\
+\
+Wrote our user stories. William setup the repository an added me as a contributor to the project.\
+\
+Total time: 1hr\
 \'97\'97\'97\'97\'97\'97\'97\'97\
+\
+Thursday 3/5/15\
+\
+Met in the CS Lab to do our first paired-programming on placing an individual ship. We went over a long review of git vs subversion, repos, etc. This took most of our time, but was worth it. \
+\
+We also set up my my Xcode project to push to our repository from Xcode, and installed SSH keys on my computer. Our next meeting will involved placing multiple ships and testing whether or not there are overlapping ships or off-board ships. \
+\
+Total time 3hr\
+\pard\tx626\pardeftab626\pardirnatural
+\cf0 \
+\pard\tx529\pardeftab529\pardirnatural
+\cf0 \'97\'97\'97\'97\'97\'97\'97\'97\
 \
 Wednesday 3/11/15\
 \
+Met in William's office where we pair-programmed for the second time, writing tests to check whether ships were overlapping or off the board. This involved writing a new class BFBoard, where ships are stored to a vector and checking the coordinates of the ships.\
 \
 \
 Total time: 1.5hr\
+\
 \'97\'97\'97\'97\'97\'97\'97\'97\
 \
 Thursday 3/12/15\
-	Today we started implementation collision detection and bad ship placement. Our first tests for bad ship placement (both off the board and length going off the board) were easy to implement. Implementing collision detection was cleverly implement using unordered_sets. \
+Today we started implementation collision detection and bad ship placement. Our first tests for bad ship placement (both off the board and length going off the board) were easy to implement. Implementing collision detection was cleverly implement using unordered_sets. \
 \
-	We also assigned specific goals for over Spring Break, as meeting up will not be possible until after Spring Break. \
+We also assigned specific goals for over Spring Break, as meeting up William not be possible until after Spring Break. \
 \
 Total time: 2hr\
+\
 \'97\'97\'97\'97\'97\'97\'97\'97\
 \
 Wednesday 3/19/15 8:13PM\
 \
-Started designing the GUI using Cinder. I read most of the documentation concerning images and mouse events. I decided that finding a way to add the required libraries was wasting too much time so I decided to take files from the working project into a separate GUI project. All ship graphics and simple board (this will be updated to have a better board) have been implemented. \
+Started designing the GUI using Cinder. I read most of the documentation concerning images and mouse events. I decided that finding a way to add the required libraries was wasting too much time so I decided to take files from the working project into a separate GUI project. All ship graphics and simple board (this William be updated to have a better board) have been implemented. \
 Working connecting GUI with code.\
 \
 Total time: 2.5hr\
@@ -38,19 +58,73 @@ Wednesday 3/19/15 10:49PM\
 Implemented code for when a game ends (all ships are sunk). I used an existing function William wrote to write the code.\
 \
 Total time: .5hr\
+\
 \'97\'97\'97\'97\'97\'97\'97\'97\
 \
-Thursday 5:15AM\
+Thursday 3/20/15 5:15AM\
 \
 Finished three user stories (one of which was out of order, explained later), full game functionality is implemented. The only issue we are having is implementing a GUI. This comes from my lack of understanding how the libraries are linked to the GUI project I created earlier. More will hopefully be done tomorrow when William and I chat over Google Hangouts (assuming there are no time conflicts). \
 \
 Refactored some code such as the gameEnded function into the Game class from the BFBoard class. This made more sense as the function originally checked if all the ships on the board were sunk. It now checks both for to see if a player's ships are sunk. \
 \
 Total time: 2.5hr\
+\
 \'97\'97\'97\'97\'97\'97\'97\'97\
+\
 Saturday 3/21/15 4:38 AM\
 \
-Created separate repository for GUI. Couldn't determine what the error was and too much time was being wasted. Implemented code to store the images in.\
+Created separate repository for GUI. Couldn't determine what the error was so I decided to create a separate project to work on the GUI. Wrote code to draw the game background, game title, and new game text layouts. https://github.com/develjacob/battlefleetgui (needed to be able to save changes)\
+\
+I eventually got it to where the user could place pins anywhere on the board (background). The next step is to handle the game logic, which I plan to discuss with Will. \
+\
+Finished User Stories:\
+- Menu when game opens. \
+- Graphics for all ships.\
+\
+Total time: 4hr\
+\
+\'97\'97\'97\'97\'97\'97\'97\'97\
+\
+Saturday 3/21/15 3:00PM\
+\
+I used switch statements to handle game flow, . William and I pair-programmed over a Google Hangout where we reviewed previously committed code and finished the game. My code needed some refactoring, which Will helped with during our paired-programming. \
+\
+Finishing the game logic ran from approximately 6PM to midnight, where we only left out the option for a game rematch and different ship sizes with directions. To compensate, the number of ships was set to eight. \
+\
+Total time: 9hr\
+\
+\'97\'97\'97\'97\'97\'97\'97\'97\
+\
+Sunday 3/22/15 3:00PM\
+\
+Refactored slightly, renamed functions for better understanding. I played a simple game with my younger nephew to at least get a feel for the game. 1x1 ships are definitely too much. The simple game we had played took close to 30 minutes, with the entire board being filled with misses. I may talk to William about placing more ships for a demo for Monday's Presentation.\
+\
+Finished committing changed to the project.\
+\
+Total time: 1hr\
+\
+\'97\'97\'97\'97\'97\'97\'97\'97\
 \
 \
-Total time: 4hr.}
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+ }
