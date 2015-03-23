@@ -8,7 +8,7 @@
 
 #include "BFShip.h"
 
-BFShip::BFShip(unsigned int x, unsigned int y, unsigned int length, unsigned int direction){
+BFShip::BFShip(unsigned int x, unsigned int y, unsigned int length, Direction direction){
     
 	_xCoordinate = x;
 	_yCoordinate = y;
@@ -29,7 +29,7 @@ const unsigned int BFShip::getLength() const{
     
 }
 
-const unsigned int BFShip::getDirection() const{
+const Direction BFShip::getDirection() const{
     
     return _direction;
 }

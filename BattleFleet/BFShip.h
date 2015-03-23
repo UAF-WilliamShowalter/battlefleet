@@ -18,10 +18,10 @@ typedef std::pair<unsigned int,unsigned int> boardCoordinate;
 class BFShip {
 public:
 	
-	BFShip(unsigned int x, unsigned int y, unsigned int length, unsigned int Direction);
+	BFShip(unsigned int x, unsigned int y, unsigned int length, Direction Direction);
 	const boardCoordinate getPosition() const;
 	const unsigned int getLength() const;
-	const unsigned int getDirection() const;
+	const Direction getDirection() const;
 	
 	bool operator == (const BFShip & rhs) const;
     
@@ -30,7 +30,7 @@ private:
 	unsigned int _xCoordinate;
 	unsigned int _yCoordinate;
 	unsigned int _length;
-	unsigned int _direction;
+	Direction _direction;
 	
 };
 

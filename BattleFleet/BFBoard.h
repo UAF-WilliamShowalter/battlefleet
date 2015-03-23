@@ -34,7 +34,7 @@ const int BF_BOARD_SIZE = 10;
 class BFBoard {
 public:
     
-	bool placeShip(unsigned int x, unsigned int y, unsigned int length, unsigned int Direction);
+	bool placeShip(unsigned int x, unsigned int y, unsigned int length, Direction Direction);
 	bool placePin(unsigned int x, unsigned int y);
 	bool checkAfloat (const BFShip & shipToCheck) const;
 	const vector<BFShip> & getShips() const;
@@ -47,7 +47,10 @@ public:
 
 public: // Could be made private if testing program is refactored to get code coverage only through the other public interfaces
 	bool coordHasHit(unsigned int x, unsigned int y) const;
-	bool checkCollision (const BFShip & newShip) const;
+
+private:
+	bool checkCollisionFree (const BFShip & newShip) const;
+	pair<int,int> getDirectionModifier(Direction direction) const;
 
 private:
 	coordinateSet getSpaces(const BFShip & ship) const;

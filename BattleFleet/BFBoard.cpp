@@ -8,58 +8,26 @@
 
 #include "BFBoard.h"
 
-bool BFBoard::placeShip(unsigned int x, unsigned int y, unsigned int length, unsigned int direction){
+bool BFBoard::placeShip(unsigned int x, unsigned int y, unsigned int length, Direction direction){
     
-    if (x > 9) {
+    if (x >= BF_BOARD_SIZE || y >= BF_BOARD_SIZE) {
         
         return false;
         
     }
-    
-    if (y > 9) {
-        
-        return false;
-        
-    }
-    
-    if (direction == NORTH) {
 
-        if ((y + length) > BF_BOARD_SIZE) {
-            
+	pair<int,int> modifiers = getDirectionModifier(direction);
+	int xModifier = modifiers.first, yModifier = modifiers.second;
+
+	if ( ((y + yModifier*(length - 1)) >= BF_BOARD_SIZE) ||
+		 ((x + xModifier*(length - 1)) >= BF_BOARD_SIZE) ) {
+
             return false;
-            
-        }
-    }
-    
-    if (direction == SOUTH) {
-        
-        if ((y - length + 1) > 9) {
-            
-            return false;
-            
-        }
-    }
-    
-    if (direction == EAST) {
-        
-        if ((x + length) > BF_BOARD_SIZE) {
-            
-            return false;
-            
-        }
-    }
-    
-    if (direction == WEST) {
-        
-        if ((x - length + 1) > 9) {
-            
-            return false;
-            
-        }
-    }
+	}
 
 	BFShip newShip (x,y,length,direction);
-	if (checkCollision(newShip)){
+
+	if (checkCollisionFree(newShip)){
 		_board.push_back(BFShip(x,y,length,direction));
 		return true;
 	}
@@ -72,7 +40,7 @@ const vector<BFShip> & BFBoard::getShips() const{
 	return _board;
 }
 
-bool BFBoard::checkCollision (const BFShip & newShip) const{
+bool BFBoard::checkCollisionFree (const BFShip & newShip) const{
 	coordinateSet spaces;
 
 	coordinateSet newShipCoordinates = getSpaces(newShip);
@@ -91,16 +59,10 @@ bool BFBoard::checkCollision (const BFShip & newShip) const{
 coordinateSet BFBoard::getSpaces(const BFShip & ship) const{
 	coordinateSet spaces;
 	boardCoordinate currentPosition = ship.getPosition();
-	int xModifier = 0, yModifier = 0;
 
-	if (ship.getDirection() == NORTH)
-		yModifier = 1;
-	if (ship.getDirection() == SOUTH)
-		yModifier = -1;
-	if (ship.getDirection() == EAST)
-		xModifier = 1;
-	if (ship.getDirection() == WEST)
-		xModifier = -1;
+	pair<int,int> modifiers = getDirectionModifier(ship.getDirection());
+
+	int xModifier = modifiers.first, yModifier = modifiers.second;
 
 	for (auto coordNum = 0; coordNum < ship.getLength();
 		 currentPosition.first += xModifier, currentPosition.second += yModifier, coordNum++){
@@ -224,4 +186,18 @@ vector<pin> BFBoard::getMisses() const {
     
 }
 
+pair<int,int> BFBoard::getDirectionModifier(Direction direction) const{
+	int xModifier = 0, yModifier = 0;
+
+	if (direction == NORTH)
+		yModifier = 1;
+	if (direction == SOUTH)
+		yModifier = -1;
+	if (direction == EAST)
+		xModifier = 1;
+	if (direction == WEST)
+		xModifier = -1;
+
+	return pair<int,int>(xModifier,yModifier);
+}
 

@@ -266,7 +266,6 @@ void BattleFleetGUIApp::draw() {
             drawBackground();
             drawPlayerShips(_game.playerTurn());
             drawPlayerPins(_game.playerTurn());
-            
             drawPlayerPins(_game.getInactivePlayer());
             
             break;
@@ -278,7 +277,6 @@ void BattleFleetGUIApp::draw() {
             drawBackground();
             drawPlayerShips(_game.playerTurn());
             drawPlayerPins(_game.playerTurn());
-            
             drawPlayerPins(_game.getInactivePlayer());
             
             break;
